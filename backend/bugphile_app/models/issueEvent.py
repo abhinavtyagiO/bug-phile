@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from datetime import date, datetime
 from backend.bugphile_app.models.issue import Issue
 
 
@@ -17,5 +17,5 @@ class IssueEvent(models.Model):
     oldValue = models.CharField(max_length=100)
     newValue = models.CharField(max_length=100)
     user = models.ForeignKey(User)
-    timestamp = models.DateTimeField(auto_now_add=True)
+    timestamp = models.DateTimeField(auto_now_add=True, datetime=datetime.now)
     issue = models.ForeignKey(Issue)
