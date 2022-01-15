@@ -14,8 +14,8 @@ class IssueEvent(models.Model):
         ('FINISHED', 'Finished')
     ]
     type = models.CharField(choices=PROJECT_STATUS_TYPE, default='Testing')
-    oldValue = models.CharField(max_length=100)
-    newValue = models.CharField(max_length=100)
+    old_value = models.CharField(max_length=100)
+    new_value = models.CharField(max_length=100)
     user = models.ForeignKey(User)
     timestamp = models.DateTimeField(auto_now_add=True, datetime=datetime.now)
     issue = models.ForeignKey(Issue)
