@@ -1,0 +1,6 @@
+keys:
+  secret_key: "django-insecure-q!a)nb$pl^bq&@_g2tuc$*l(2q7rq*(b9)0_i9ez*jyr)z4f$^"
+  client_id: "21362975400-gh8c0bl2q8msjju7ebhu0us66f7949sr.apps.googleusercontent.com"
+  client_secret: "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"
+  redirect_uri: 
+  state: 'thisstate'

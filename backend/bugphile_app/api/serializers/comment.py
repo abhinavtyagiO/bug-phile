@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from models.comment import Comment
+from bugphile_app.models import Comment
 
 class CommentSerializer(serializers.ModelSerializer):
     

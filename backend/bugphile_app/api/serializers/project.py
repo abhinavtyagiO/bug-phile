@@ -1,8 +1,10 @@
 from rest_framework import serializers
-from models.project import Project
+from bugphile_app.models import Project
+from bugphile_app.api.serializers import ProjectStatusSerializer
 
 class ProjectSerializer(serializers.ModelSerializer):
     members = serializers.SerializerMethodField()
+    status = ProjectStatusSerializer()
 
     def get_members(self, obj):
         members_list = []

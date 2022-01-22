@@ -13,5 +13,3 @@ class IsIssueReporterOrReadOnly(BasePermission):
         is_reporter = request.user == obj.reporter
 
         return is_reporter
-
-
