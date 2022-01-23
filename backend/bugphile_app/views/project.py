@@ -1,10 +1,8 @@
 from rest_framework.decorators import permission_classes
 from rest_framework.permissions import IsAuthenticated
-from api.serializers.project import ProjectSerializer, Project
+from bugphile_app.api.serializers.project import ProjectSerializer, Project
 from rest_framework import viewsets
-from permissions.common import IsMasterOrReadOnly
-from permissions.project import IsProjectCreatorOrMemberOrReadOnly
-
+from bugphile_app.permissions import IsMasterOrReadOnly, IsProjectCreatorOrMemberOrReadOnly
 
 class ProjectViewSet(viewsets.ModelViewSet):
     """

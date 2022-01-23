@@ -20,4 +20,7 @@ class Issue(models.Model):
 
     def __str__(self):
         return f"{self.title}: {self.project.name}"
- 
+
+    class Meta:
+        verbose_name = "Issue"
+        verbose_name_plural = "Issues"

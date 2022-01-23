@@ -33,4 +33,4 @@ class IssueDetailSerializer(IssueSerializer):
     comments = CommentSerializer(many=True, source='comment', read_only=True)
 
     class Meta(IssueSerializer.Meta):
-        fields = IssueSerializer.Meta.fields + ('comments',)
+        fields = '__all__'

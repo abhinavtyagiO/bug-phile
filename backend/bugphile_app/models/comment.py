@@ -11,3 +11,7 @@ class Comment(models.Model):
 
     def __str__(self):
         return f"{self.text} | Issue:{self.issue.title} | Commenter:{self.commenter.name}"
+
+    class Meta:
+        verbose_name = "Comment"
+        verbose_name_plural = "Comments"

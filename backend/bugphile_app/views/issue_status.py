@@ -1,9 +1,8 @@
 from rest_framework import viewsets
 from rest_framework.decorators import permission_classes
 from rest_framework.permissions import IsAuthenticated
-from permissions.common import IsMasterOrReadOnly
-from permissions.issue import IsIssueReporterOrReadOnly
-from api.serializers import IssueStatusSerializer
+from bugphile_app.permissions import IsMasterOrReadOnly,IsIssueReporterOrReadOnly
+from bugphile_app.api.serializers import IssueStatusSerializer
 from bugphile_app.models import IssueStatus
 
 class IssueStatusViewSet(viewsets.ModelViewSet):

@@ -16,3 +16,7 @@ class Project(models.Model):
 
     def __str__(self):
         return f"{self.creator}"
+
+    class Meta:
+        verbose_name = "Project"
+        verbose_name_plural = "Projects"

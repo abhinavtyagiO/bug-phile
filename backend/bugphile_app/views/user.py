@@ -5,7 +5,7 @@ from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from bugphile_app.api.serializers import UserSerializer
 from bugphile_app.models import User
-from permissions.common import IsMasterOrReadOnly
+from bugphile_app.permissions import IsMasterOrReadOnly
 from rest_framework.authentication import BasicAuthentication, SessionAuthentication
 from bugphile.settings import BASE_CONFIGURATION
 from bugphile_app.auth import CsrfExemptSessionAuthentication
