@@ -1,7 +1,6 @@
 from django.db import models
-from django.contrib.auth.models import User
 from datetime import date, datetime
-from bugphile_app.models import Issue
+from bugphile_app.models import Issue, User
 
 
 class IssueEvent(models.Model):

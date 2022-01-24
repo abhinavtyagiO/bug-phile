@@ -1,7 +1,6 @@
 from django.db import models
-from django.contrib.auth.models import User
 from ckeditor.fields import RichTextField
-from bugphile_app.models import Issue
+from bugphile_app.models import Issue, User
 
 class Comment(models.Model):
     commenter = models.ForeignKey(User, on_delete=models.CASCADE)

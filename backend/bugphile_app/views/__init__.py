@@ -6,3 +6,4 @@ from .issue_status import IssueStatusViewSet
 from .issue_tag import IssueTagViewSet
 from .issue import IssueViewSet
 from .comment import CommentViewSet
+from .oauth import OAuthView

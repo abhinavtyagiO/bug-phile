@@ -1,8 +1,7 @@
 from os import link
-from django.contrib.auth.models import User
 from django.db import models
 from ckeditor.fields import RichTextField
-from bugphile_app.models import ProjectStatus
+from bugphile_app.models import ProjectStatus, User
 
 class Project(models.Model):
     name = models.CharField(max_length=100)

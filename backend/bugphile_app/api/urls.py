@@ -1,4 +1,5 @@
 from rest_framework.routers import DefaultRouter
+from django.urls import path
 from bugphile_app.views import *
 
 router = DefaultRouter()
@@ -12,9 +13,6 @@ router.register(r'tags', IssueTagViewSet, basename='tags')
 router.register(r'issue_status', IssueStatusViewSet, basename='issue_status')
 urlpatterns = router.urls
 
-# urlpatterns += [
-#     url(r'topdebuggers', TopDebuggersView.as_view()),
-#     url(r'tag_colors', TagColorsView.as_view()),
-#     url(r'issue_status_colors', IssueStatusColorsView.as_view()),
-#     url(r'search', SearchView.as_view()),
-# ]
+urlpatterns += [
+    path(r'oauth', OAuthView.as_view()),
+]

@@ -1,9 +1,9 @@
 from django.db import models
-from django.contrib.auth.models import User as AbstractUser
+from django.contrib.auth.models import AbstractUser
 
 class User(AbstractUser):
     name = models.CharField(max_length=50)
-    is_master = models.BooleanField(default=False, blank=True, null=True)
+    is_master = models.BooleanField(default=False)
     avatar = models.ImageField(upload_to ='media/avatars', null=True)
 
     def __str__(self):

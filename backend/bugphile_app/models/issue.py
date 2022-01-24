@@ -4,8 +4,8 @@ from bugphile_app.models import (
     Project,
     IssueStatus,
     IssuePriority,
+    User,
 )
-from django.contrib.auth.models import User
 from ckeditor.fields import RichTextField
 
 class Issue(models.Model):
