@@ -6,7 +6,6 @@ from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
 from django.contrib.auth import login, logout
 from django.contrib.auth.hashers import make_password
-from backend.bugphile_app.models import user
 from bugphile.settings import BASE_CONFIGURATION
 from bugphile_app.models import User
 
