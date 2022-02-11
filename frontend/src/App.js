@@ -1,7 +1,9 @@
+import Dashboard from "./containers/dashoard";
+
 const App = () => {
   return (
     <div className="App">
-      Hello world!
+      <Dashboard />
     </div>
   );
 }
