@@ -1,11 +1,14 @@
-import Dashboard from "./containers/dashoard";
+import Layout from "./layout";
+import "./App.css";
+import Header from "./components/header";
 
 const App = () => {
   return (
     <div className="App">
-      <Dashboard />
+      <Header />
+      <Layout />
     </div>
   );
-}
+};
 
 export default App;

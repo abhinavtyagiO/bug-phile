@@ -1,0 +1,9 @@
+.issue-tag-chip {
+  display: flex;
+}
+
+.issue-tag-chip-color {
+  width: 5px;
+  height: 5px;
+  background-color: red;
+}

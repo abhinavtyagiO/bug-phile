@@ -1,0 +1,23 @@
+.issue-container {
+  padding: 1rem;
+  width: 100%;
+}
+
+.issue-container-reporter {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.issue-container-info-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.issue-container-info-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}

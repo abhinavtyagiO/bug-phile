@@ -1,0 +1,17 @@
+.add-project-btn {
+  margin: 1rem auto;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-project-btn button {
+  margin: 1rem;
+}
+
+.projects-list-container {
+  width: 17vw;
+  min-width: 13rem;
+  border-right: 1px solid gray;
+}

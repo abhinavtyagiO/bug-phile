@@ -12,12 +12,12 @@ import {
   Menu,
   Button,
 } from "@mui/material";
-import MenuIcon from '@mui/icons-material/Menu';
-import SearchIcon from '@mui/icons-material/Search';
-import AccountCircle from '@mui/icons-material/AccountCircle';
-import MailIcon from '@mui/icons-material/Mail';
-import NotificationsIcon from '@mui/icons-material/Notifications';
-import MoreIcon from '@mui/icons-material/MoreVert'
+import MenuIcon from "@mui/icons-material/Menu";
+import SearchIcon from "@mui/icons-material/Search";
+import AccountCircle from "@mui/icons-material/AccountCircle";
+import MailIcon from "@mui/icons-material/Mail";
+import NotificationsIcon from "@mui/icons-material/Notifications";
+import MoreIcon from "@mui/icons-material/MoreVert";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -158,20 +158,32 @@ const Header = () => {
   );
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" style={{backgroundColor: '#ffffff'}}>
+    <>
+      <AppBar
+        sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        position="static"
+        style={{ backgroundColor: "#ffffff" }}
+      >
         <Toolbar>
           <Typography
             variant="h6"
             noWrap
             component="div"
-            sx={{ display: { xs: "none", sm: "block" } }, {color: '#595858'}}
+            sx={
+              ({
+                display: {
+                  xs: "none",
+                  sm: "block",
+                },
+              },
+              { color: "#595858" })
+            }
           >
             Bugphile
           </Typography>
-          <Search style={{color: '#818181', backgroundColor: '#F1F3F4'}} >
+          <Search style={{ color: "#818181", backgroundColor: "#F1F3F4" }}>
             <SearchIconWrapper>
-              <SearchIcon style={{color: '#818181'}} />
+              <SearchIcon style={{ color: "#818181" }} />
             </SearchIconWrapper>
             <StyledInputBase
               placeholder="Search"
@@ -180,7 +192,7 @@ const Header = () => {
           </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            <Button variant="outlined"  >DASHBOARD</Button>
+            <Button variant="outlined">DASHBOARD</Button>
             <IconButton
               size="large"
               edge="end"
@@ -190,7 +202,7 @@ const Header = () => {
               onClick={handleProfileMenuOpen}
               color="inherit"
             >
-              <AccountCircle style={{color: '#F1F3F4'}} />
+              <AccountCircle style={{ color: "#F1F3F4" }} />
             </IconButton>
           </Box>
           <Box sx={{ display: { xs: "flex", md: "none" } }}>
@@ -209,8 +221,8 @@ const Header = () => {
       </AppBar>
       {renderMobileMenu}
       {renderMenu}
-    </Box>
+    </>
   );
-}
+};
 
 export default Header;
