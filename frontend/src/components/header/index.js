@@ -181,7 +181,13 @@ const Header = () => {
           >
             Bugphile
           </Typography>
-          <Search style={{ color: "#818181", backgroundColor: "#F1F3F4" }}>
+          <Search
+            style={{
+              color: "#818181",
+              backgroundColor: "#F1F3F4",
+              width: "40rem",
+            }}
+          >
             <SearchIconWrapper>
               <SearchIcon style={{ color: "#818181" }} />
             </SearchIconWrapper>

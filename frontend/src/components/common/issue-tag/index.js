@@ -3,10 +3,12 @@ import { Chip } from "@mui/material";
 
 import "./styles.css";
 
-const IssueTag = () => {
+const IssueTag = (props) => {
+  const { tag, index } = props;
+  console.log(tag.name);
   return (
     <Chip
-      label="quality"
+      label={tag.name}
       variant="outlined"
       className="issue-tag-chip"
       avatar={<div className="issue-tag-chip-color"></div>}

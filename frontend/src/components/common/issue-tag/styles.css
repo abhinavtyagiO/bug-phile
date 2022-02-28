@@ -3,7 +3,8 @@
 }
 
 .issue-tag-chip-color {
-  width: 5px;
-  height: 5px;
-  background-color: red;
+  width: 0.8rem !important;
+  height: 0.8rem !important;
+  background-color: rgb(0, 81, 255);
+  border-radius: 50%;
 }

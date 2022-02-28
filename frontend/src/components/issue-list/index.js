@@ -8,28 +8,34 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import FilterListIcon from "@mui/icons-material/FilterList";
 import AddIcon from "@mui/icons-material/Add";
 
 import IssueListItem from "./IssueListItem";
 import "./styles.css";
+import AddIssueWithModal from "../add-issue-with-modal";
 
 const drawerWidth = 240;
 
-const IssueList = () => {
+const IssueList = (props) => {
   return (
     <div className="issues-list-container">
       <div className="add-btn-container">
-        <Button variant="outlined" startIcon={<AddIcon />}>
-          ADD PROJECT
+        <Button
+          variant="outlined"
+          startIcon={<FilterListIcon />}
+          endIcon={<KeyboardArrowDownIcon />}
+        >
+          FILTER
         </Button>
-        <Button variant="outlined" startIcon={<AddIcon />}>
-          ADD PROJECT
-        </Button>
+        <AddIssueWithModal />
       </div>
       <List>
-        <IssueListItem />
+        {
+          props.issues.map((issue, index) => (
+            <IssueListItem key={index} issue={issue} />
+        ))}
       </List>
     </div>
   );

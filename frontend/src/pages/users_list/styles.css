@@ -1,0 +1,16 @@
+.users-list-container {
+  padding: 1rem;
+  width: 100%;
+}
+
+.users-list-container-user {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.users-list-container-user-avatar {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}

@@ -11,8 +11,8 @@
 }
 
 .issues-list-container {
-  width: 33vw;
-  min-width: 26rem;
+  /* width: 40vw; */
+  min-width: 33rem;
   border-right: 1px solid gray;
 }
 

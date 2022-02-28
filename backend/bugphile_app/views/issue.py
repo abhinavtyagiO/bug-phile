@@ -11,3 +11,6 @@ class IssueViewSet(viewsets.ModelViewSet):
     serializer_class = IssueSerializer
     queryset = Issue.objects.all()
     permission_classes = [IsAuthenticated & (IsIssueReporterOrReadOnly | IsMasterOrReadOnly)]
+
+    def perform_create(self, serializer):
+        serializer.save(creator=self.request.user)

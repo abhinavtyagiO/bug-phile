@@ -1,0 +1,46 @@
+.dashboard-container {
+  padding: 1rem;
+  width: 100%;
+}
+
+.dashboard-container-info-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.dashboard-container-info-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.dashboard-container-project-stats {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.dashboard-container-project-stats-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.dashboard-container-graph-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.dashboard-container-graph {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.dashboard-container-pie-graph {
+  width: 30rem;
+}

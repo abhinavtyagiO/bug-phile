@@ -13,7 +13,7 @@ import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import AddIcon from "@mui/icons-material/Add";
 
-import IssueStatus from "../../components/common/issue-status";
+import ProjectStatus from "../../components/common/project-status";
 import IssueTag from "../../components/common/issue-tag";
 import UserAvatar from "../../components/common/user-avatar";
 import IssuePriority from "../../components/common/issue-priority";
@@ -21,51 +21,35 @@ import "./styles.css";
 
 const drawerWidth = 240;
 
-const Issue = () => {
+const Project = () => {
   return (
-    <div className="issue-container">
-      <h3>App is not responsive</h3>
+    <div className="project-container">
+      <h3>Project Name</h3>
       <Divider />
-      <div className="issue-container-reporter">
-        <div className="issue-container-info-left">
-          <div>REPORTED BY</div>
+      <div className="project-container-reporter">
+        <div className="project-container-info-left">
+          <div>CREATED BY</div>
           <div>
             <UserAvatar />
           </div>
         </div>
-        <div className="issue-container-info-right">
+        <div className="project-container-info-right">
           <div>CREATED ON</div>
           <div>30/01/2022</div>
         </div>
       </div>
       <Divider />
-      <div className="issue-container-info-left">
-        <div>TAGS</div>
-        <div>
-          <IssueTag />
-        </div>
-      </div>
-      <Divider />
-      <div className="issue-container-reporter">
-        <div className="issue-container-info-left">
+      <div className="project-container-reporter">
+        <div className="project-container-info-left">
           <div>STATUS</div>
           <div>
-            <IssueStatus />
-            <IssueStatus />
-            <IssueStatus />
-            <IssueStatus />
-          </div>
-        </div>
-        <div className="issue-container-info-right">
-          <div>PRIORITY</div>
-          <div>
-            <IssuePriority />
+            <ProjectStatus />
           </div>
         </div>
       </div>
       <Divider />
-      <div className="issue-container-info-left">
-        <div>ASSIGNEES</div>
+      <div className="project-container-info-left">
+        <div>MEMBERS</div>
         <div>
           <UserAvatar />
           <UserAvatar />
@@ -73,7 +57,7 @@ const Issue = () => {
         </div>
       </div>
       <Divider />
-      <div className="issue-container-info-left">
+      <div className="project-container-info-left">
         <div>DESCRIPTION</div>
         <div>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -86,19 +70,28 @@ const Issue = () => {
         </div>
       </div>
       <Divider />
-      <div className="issue-container-info-left">
-        <div>COMMENTS</div>
-        <div className="issue-container-comment-box">
-          <Avatar />
-          <div className="issue-container-comment-content">
-            <div className="">
-              Abhinav Tyagi <span>14:48 • 31/01/2022</span>
-            </div>
-            <div className="">
-              I wish I could get away with this issue by saying this is not my
-              field of expertise. Development sucks man, I wish I were a
-              Designer. :\
-            </div>
+      <div className="project-container-info-left">
+        <div>ISSUE STATS</div>
+        <div className="project-container-issue-stats-container">
+        <div className="project-container-issue-stats">
+            <div>Total Issues</div>
+            <h1>105</h1>
+          </div>
+          <div className="project-container-issue-stats">
+            <div>Total Issues</div>
+            <h1>105</h1>
+          </div>
+          <div className="project-container-issue-stats">
+            <div>Total Issues</div>
+            <h1>105</h1>
+          </div>
+          <div className="project-container-issue-stats">
+            <div>Total Issues</div>
+            <h1>105</h1>
+          </div>
+          <div className="project-container-issue-stats">
+            <div>Total Issues</div>
+            <h1>105</h1>
           </div>
         </div>
       </div>
@@ -106,4 +99,4 @@ const Issue = () => {
   );
 };
 
-export default Issue;
+export default Project;

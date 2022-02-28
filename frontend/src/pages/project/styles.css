@@ -1,36 +1,49 @@
-.issue-container {
+.project-container {
   padding: 1rem;
   width: 100%;
 }
 
-.issue-container-reporter {
+.project-container-reporter {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
 }
 
-.issue-container-info-left {
+.project-container-info-left {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
 }
 
-.issue-container-info-right {
+.project-container-info-right {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
 }
 
-.issue-container-comment-box {
+.project-container-comment-box {
   display: flex;
   justify-content: flex-start;
   align-items: center;
 }
 
-.issue-container-comment-content {
+.project-container-comment-content {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
+}
+
+.project-container-issue-stats {
+  display: flex;
+	flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.project-container-issue-stats-container {
+	display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }

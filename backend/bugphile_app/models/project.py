@@ -14,7 +14,7 @@ class Project(models.Model):
     status = models.ForeignKey(ProjectStatus, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
-        return f"{self.creator}"
+        return f"{self.name}"
 
     class Meta:
         verbose_name = "Project"

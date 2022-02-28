@@ -1,4 +1,6 @@
 import * as React from "react";
+import AddProjectWithModal from "../add-project-with-modal";
+import ProjectStatus from "../common/project-status";
 import {
   Button,
   List,
@@ -7,30 +9,32 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
+  ListItemAvatar,
+  Avatar,
 } from "@mui/material";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
+import ImageIcon from "@mui/icons-material/Image";
 import AddIcon from "@mui/icons-material/Add";
 
 import "./styles.css";
 
-const ProjectList = () => {
+const ProjectList = (props) => {
   return (
     <div className="projects-list-container">
       <div className="add-project-btn">
-        <Button variant="outlined" startIcon={<AddIcon />}>
-          ADD PROJECT
-        </Button>
+        <AddProjectWithModal />
       </div>
       <List>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
+        {props.projects.map((project, index) => (
+          <ListItem button className="project-list-item" key={index}>
+            <img className='project-list-item-image' src={project.image} />
+            <div className="project-list-item-content">
+              {project.name}
+              <ProjectStatus />
+            </div>
           </ListItem>
         ))}
+        <Divider />
       </List>
     </div>
   );

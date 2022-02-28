@@ -9,17 +9,16 @@ from bugphile_app.api.serializers import (
 )
 
 class IssueSerializer(serializers.ModelSerializer):
-    creator = UserSerializer()
-    assignees = UserSerializer(many=True)
+    assignee = UserSerializer(many=True)
     project = serializers.SerializerMethodField()
     status = IssueStatusSerializer()
     priority = IssuePrioritySerializer()
-    tags = IssueTagSerializer()
+    tags = IssueTagSerializer(many=True)
 
     def get_project(self, obj):
         data = {
             'name': obj.project.name,
-            'image': obj.project.image,
+            'image': obj.project.image.url,
         }
         return data
 
