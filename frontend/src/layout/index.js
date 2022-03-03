@@ -22,7 +22,7 @@ const Layout = () => {
     <Grid sx={{ display: "flex" }} className="content-grid">
       <ProjectList projects={projectListData} />
       <IssueList issues={issueListData} />
-      <Project project={projectData} />
+      <User userData={userListData[0]} userProjects={projectListData} userIssues={issueListData}  />
     </Grid>
   );
 };

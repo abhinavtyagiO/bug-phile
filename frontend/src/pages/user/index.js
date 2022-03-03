@@ -54,7 +54,7 @@ const User = (props) => {
                 <Avatar src={project.image} />
                 <div className="user-container-user-info-name">
                   <div>{project.name}</div>
-                  <ProjectStatus name={project.status} />
+                  <ProjectStatus status={project.status} />
                 </div>
               </div>
             );

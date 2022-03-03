@@ -16,8 +16,8 @@ import AddIcon from "@mui/icons-material/Add";
 // import { Pie } from "react-chartjs-2";
 
 import "./styles.css";
-
-const drawerWidth = 240;
+import ProjectStats from "../../components/project-stats";
+import { dashboardProjectStatsList } from "../../mocks";
 
 const data = {
   labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
@@ -51,28 +51,7 @@ const Dashboard = () => {
     <div className="dashboard-container">
       <div className="dashboard-container-info-left">
         <div>PROJECT STATS</div>
-        <div className="dashboard-container-project-stats-container">
-          <div className="dashboard-container-project-stats">
-            <div>Total Issues</div>
-            <h1>105</h1>
-          </div>
-          <div className="dashboard-container-project-stats">
-            <div>Total Issues</div>
-            <h1>105</h1>
-          </div>
-          <div className="dashboard-container-project-stats">
-            <div>Total Issues</div>
-            <h1>105</h1>
-          </div>
-          <div className="dashboard-container-project-stats">
-            <div>Total Issues</div>
-            <h1>105</h1>
-          </div>
-          <div className="dashboard-container-project-stats">
-            <div>Total Issues</div>
-            <h1>105</h1>
-          </div>
-        </div>
+        <ProjectStats stats={dashboardProjectStatsList} />
       </div>
       <Divider />
       <div className="dashboard-container-graph-container">

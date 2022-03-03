@@ -1,4 +1,6 @@
 import * as React from "react";
+import { projectStatsList } from "../../mocks";
+import ProjectStats from "../../components/project-stats";
 import {
   Button,
   List,
@@ -9,10 +11,6 @@ import {
   ListItemText,
   Avatar,
 } from "@mui/material";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
-import AddIcon from "@mui/icons-material/Add";
-
 import ProjectStatus from "../../components/common/project-status";
 import IssueTag from "../../components/common/issue-tag";
 import UserAvatar from "../../components/common/user-avatar";
@@ -62,28 +60,7 @@ const Project = (props) => {
       <Divider />
       <div className="project-container-info-left">
         <div>ISSUE STATS</div>
-        <div className="project-container-issue-stats-container">
-          <div className="project-container-issue-stats">
-            <div>Total Issues</div>
-            <h1>105</h1>
-          </div>
-          <div className="project-container-issue-stats">
-            <div>Total Issues</div>
-            <h1>105</h1>
-          </div>
-          <div className="project-container-issue-stats">
-            <div>Total Issues</div>
-            <h1>105</h1>
-          </div>
-          <div className="project-container-issue-stats">
-            <div>Total Issues</div>
-            <h1>105</h1>
-          </div>
-          <div className="project-container-issue-stats">
-            <div>Total Issues</div>
-            <h1>105</h1>
-          </div>
-        </div>
+        <ProjectStats stats={projectStatsList} />
       </div>
     </div>
   );
