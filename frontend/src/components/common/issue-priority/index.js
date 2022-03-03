@@ -1,8 +1,8 @@
 import React from "react";
 import { Chip } from "@mui/material";
 
-const IssuePriority = () => {
-  return <Chip label="urgent" />;
+const IssuePriority = (props) => {
+  return <Chip label={props.priority.text} />;
 };
 
 export default IssuePriority;

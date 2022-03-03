@@ -26,15 +26,17 @@ const ProjectList = (props) => {
       </div>
       <List>
         {props.projects.map((project, index) => (
-          <ListItem button className="project-list-item" key={index}>
-            <img className='project-list-item-image' src={project.image} />
-            <div className="project-list-item-content">
-              {project.name}
-              <ProjectStatus />
-            </div>
-          </ListItem>
+          <div>
+            <ListItem button className="project-list-item" key={index}>
+              <img className="project-list-item-image" src={project.image} />
+              <div className="project-list-item-content">
+                {project.name}
+                <ProjectStatus status={project.status} />
+              </div>
+            </ListItem>
+            {index+1 != props.projects.length ? <Divider /> : null}
+          </div>
         ))}
-        <Divider />
       </List>
     </div>
   );

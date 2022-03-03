@@ -19,54 +19,22 @@ import UserAvatar from "../../components/common/user-avatar";
 import IssuePriority from "../../components/common/issue-priority";
 import "./styles.css";
 
-
 const UsersList = (props) => {
   return (
     <div className="users-list-container">
       <h3>Users</h3>
       <Divider />
-      <div className="users-list-container-user">
-        <div className="users-list-container-user-avatar">
-          <Avatar />
-          Abhinav Tyagi
-        </div>
-        <i>Developer</i>
-      </div>
-      <div className="users-list-container-user">
-        <div className="users-list-container-user-avatar">
-          <Avatar />
-          Abhinav Tyagi
-        </div>
-        <i>Developer</i>
-      </div>
-      <div className="users-list-container-user">
-        <div className="users-list-container-user-avatar">
-          <Avatar />
-          Abhinav Tyagi
-        </div>
-        <i>Developer</i>
-      </div>
-      <div className="users-list-container-user">
-        <div className="users-list-container-user-avatar">
-          <Avatar />
-          Abhinav Tyagi
-        </div>
-        <i>Developer</i>
-      </div>
-      <div className="users-list-container-user">
-        <div className="users-list-container-user-avatar">
-          <Avatar />
-          Abhinav Tyagi
-        </div>
-        <i>Developer</i>
-      </div>
-      <div className="users-list-container-user">
-        <div className="users-list-container-user-avatar">
-          <Avatar />
-          Abhinav Tyagi
-        </div>
-        <i>Developer</i>
-      </div>
+      {props.usersList.map((user, index) => {
+        return (
+          <div key={index} className="users-list-container-user">
+            <div className="users-list-container-user-avatar">
+              <Avatar src={user.avatar} />
+              {user.name}
+            </div>
+            <i>{user.role}</i>
+          </div>
+        );
+      })}
     </div>
   );
 };

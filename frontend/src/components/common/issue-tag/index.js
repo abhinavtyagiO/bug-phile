@@ -5,7 +5,6 @@ import "./styles.css";
 
 const IssueTag = (props) => {
   const { tag, index } = props;
-  console.log(tag.name);
   return (
     <Chip
       label={tag.name}

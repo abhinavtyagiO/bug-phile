@@ -34,3 +34,9 @@
   align-items: flex-start;
   justify-content: center;
 }
+
+.issue-container-assignee{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}

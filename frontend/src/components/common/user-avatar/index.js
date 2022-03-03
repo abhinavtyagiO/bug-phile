@@ -3,13 +3,15 @@ import { Chip, Avatar } from "@mui/material";
 
 import "./styles.css";
 
-const UserAvatar = () => {
+const UserAvatar = (props) => {
   return (
     <Chip
-      label="Mihir Sachdeva"
+      label={props.user.name}
       variant="outlined"
       className="user-avatar-chip"
-      avatar={<Avatar className="user-avatar-avatar">A</Avatar>}
+      avatar={
+        <Avatar className="user-avatar-avatar">{props.user.name[0]}</Avatar>
+      }
     />
   );
 };

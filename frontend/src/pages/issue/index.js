@@ -19,18 +19,17 @@ import UserAvatar from "../../components/common/user-avatar";
 import IssuePriority from "../../components/common/issue-priority";
 import "./styles.css";
 
-const drawerWidth = 240;
-
-const Issue = () => {
+const Issue = (props) => {
+  console.log(props.issue);
   return (
     <div className="issue-container">
-      <h3>App is not responsive</h3>
+      <h3>{props.issue.title}</h3>
       <Divider />
       <div className="issue-container-reporter">
         <div className="issue-container-info-left">
           <div>REPORTED BY</div>
           <div>
-            <UserAvatar />
+            <UserAvatar user={props.issue.reporter} />
           </div>
         </div>
         <div className="issue-container-info-right">
@@ -41,66 +40,56 @@ const Issue = () => {
       <Divider />
       <div className="issue-container-info-left">
         <div>TAGS</div>
-        <div>
-          <IssueTag />
+        <div className="issue-container-assignee">
+        {props.issue.tags.map((tag, index) => {
+          return <IssueTag tag={tag} index={index} />;
+        })}
         </div>
       </div>
       <Divider />
       <div className="issue-container-reporter">
         <div className="issue-container-info-left">
           <div>STATUS</div>
-          <div>
-            <IssueStatus />
-            <IssueStatus />
-            <IssueStatus />
-            <IssueStatus />
-          </div>
+          <IssueStatus status={props.issue.status} />
         </div>
         <div className="issue-container-info-right">
           <div>PRIORITY</div>
-          <div>
-            <IssuePriority />
-          </div>
+          <IssuePriority priority={props.issue.priority} />
         </div>
       </div>
       <Divider />
       <div className="issue-container-info-left">
         <div>ASSIGNEES</div>
-        <div>
-          <UserAvatar />
-          <UserAvatar />
-          <UserAvatar />
+        <div className="issue-container-assignee">
+          {props.issue.assignee.map((user, index) => {
+            return <UserAvatar user={user} />;
+          })}
         </div>
       </div>
       <Divider />
       <div className="issue-container-info-left">
         <div>DESCRIPTION</div>
-        <div>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum.
-        </div>
+        <div dangerouslySetInnerHTML={{ __html: props.issue.description }} />
       </div>
       <Divider />
       <div className="issue-container-info-left">
         <div>COMMENTS</div>
-        <div className="issue-container-comment-box">
-          <Avatar />
-          <div className="issue-container-comment-content">
-            <div className="">
-              Abhinav Tyagi <span>14:48 • 31/01/2022</span>
+        {props.issue.comments.map((comment, index) => {
+          return (
+            <div className="issue-container-comment-box">
+              <Avatar src={comment.commenter.avatar} />
+              <div className="issue-container-comment-content">
+                <div className="">
+                  {comment.commenter.name} <span>14:48 • 31/01/2022</span>
+                </div>
+                <div
+                  dangerouslySetInnerHTML={{ __html: comment.text }}
+                  className=""
+                />
+              </div>
             </div>
-            <div className="">
-              I wish I could get away with this issue by saying this is not my
-              field of expertise. Development sucks man, I wish I were a
-              Designer. :\
-            </div>
-          </div>
-        </div>
+          );
+        })}
       </div>
     </div>
   );
