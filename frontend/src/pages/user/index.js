@@ -1,4 +1,6 @@
 import * as React from "react";
+import { Link } from "react-router-dom";
+import { links } from "../../constants/frontend-urls";
 import {
   Button,
   List,
@@ -51,57 +53,67 @@ const User = (props) => {
         <TabPanel value="1">
           {projectListData.map((project, index) => {
             return (
-              <div key={index} className="user-container-user-info">
-                <Avatar src={project.image} />
-                <div className="user-container-user-info-name">
-                  <div>{project.name}</div>
-                  <ProjectStatus status={project.status} />
-                </div>
-              </div>
+              <Link to={links.PROJECT(project.id)}>
+                <ListItem
+                  button
+                  key={index}
+                  className="user-container-user-info"
+                >
+                  <Avatar src={project.image} />
+                  <div className="user-container-user-info-name">
+                    <div>{project.name}</div>
+                    <ProjectStatus status={project.status} />
+                  </div>
+                </ListItem>
+              </Link>
             );
           })}
         </TabPanel>
         <TabPanel value="2">
           {issueListData.map((issue, index) => {
             return (
-              <ListItem button key={"text"} className="issue-list-item">
-                <IssueStatus status={issue.status} />
-                <div className="issue-list-item-content">
-                  <div className="issue-list-item-content-title">
-                    {issue.title} • <span>31/01/2022</span>
+              <Link to={links.ISSUE(issue.project.id, issue.id)}>
+                <ListItem button key={"text"} className="issue-list-item">
+                  <IssueStatus status={issue.status} />
+                  <div className="issue-list-item-content">
+                    <div className="issue-list-item-content-title">
+                      {issue.title} • <span>31/01/2022</span>
+                    </div>
+                    <div className="issue-list-item-content-reporter">
+                      By: {issue.reporter}
+                    </div>
+                    <div className="issue-list-item-content-tags">
+                      {issue.tags.map((tag, index) => {
+                        return <IssueTag tag={tag} index={index} />;
+                      })}
+                    </div>
                   </div>
-                  <div className="issue-list-item-content-reporter">
-                    By: {issue.reporter}
-                  </div>
-                  <div className="issue-list-item-content-tags">
-                    {issue.tags.map((tag, index) => {
-                      return <IssueTag tag={tag} index={index} />;
-                    })}
-                  </div>
-                </div>
-              </ListItem>
+                </ListItem>
+              </Link>
             );
           })}
         </TabPanel>
         <TabPanel value="3">
           {issueListData.map((issue, index) => {
             return (
-              <ListItem button key={"text"} className="issue-list-item">
-                <IssueStatus status={issue.status} />
-                <div className="issue-list-item-content">
-                  <div className="issue-list-item-content-title">
-                    {issue.title} • <span>31/01/2022</span>
+              <Link to={links.ISSUE(issue.project.id, issue.id)}>
+                <ListItem button key={"text"} className="issue-list-item">
+                  <IssueStatus status={issue.status} />
+                  <div className="issue-list-item-content">
+                    <div className="issue-list-item-content-title">
+                      {issue.title} • <span>31/01/2022</span>
+                    </div>
+                    <div className="issue-list-item-content-reporter">
+                      By: {issue.reporter}
+                    </div>
+                    <div className="issue-list-item-content-tags">
+                      {issue.tags.map((tag, index) => {
+                        return <IssueTag tag={tag} index={index} />;
+                      })}
+                    </div>
                   </div>
-                  <div className="issue-list-item-content-reporter">
-                    By: {issue.reporter}
-                  </div>
-                  <div className="issue-list-item-content-tags">
-                    {issue.tags.map((tag, index) => {
-                      return <IssueTag tag={tag} index={index} />;
-                    })}
-                  </div>
-                </div>
-              </ListItem>
+                </ListItem>
+              </Link>
             );
           })}
         </TabPanel>
