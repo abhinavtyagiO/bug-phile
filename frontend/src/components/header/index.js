@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Link } from "react-router-dom";
 import { styled, alpha } from "@mui/material/styles";
 import {
   AppBar,
@@ -18,6 +19,7 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
+import { pages } from "../../constants/frontend-urls";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -198,7 +200,9 @@ const Header = () => {
           </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            <Button variant="outlined">DASHBOARD</Button>
+            <Link to={pages.DASHBOARD}>
+              <Button variant="outlined">DASHBOARD</Button>
+            </Link>
             <IconButton
               size="large"
               edge="end"

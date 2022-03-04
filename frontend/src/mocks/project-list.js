@@ -1,6 +1,7 @@
 export const projectListData = [
   {
     name: "Bugphile",
+    id: 1,
     status: {
       id: 1,
       text: "testing",
@@ -11,8 +12,9 @@ export const projectListData = [
   },
   {
     name: "Bugphile",
+    id: 2,
     status: {
-      id: 1,
+      id: 2,
       text: "testing",
       color: "#0000ff",
       timestamp: "2022-02-23T14:14:23.202015Z",
@@ -21,8 +23,9 @@ export const projectListData = [
   },
   {
     name: "Bugphile",
+    id: 3,
     status: {
-      id: 1,
+      id: 3,
       text: "testing",
       color: "#0000ff",
       timestamp: "2022-02-23T14:14:23.202015Z",
@@ -31,8 +34,9 @@ export const projectListData = [
   },
   {
     name: "Bugphile",
+    id: 4,
     status: {
-      id: 1,
+      id: 4,
       text: "testing",
       color: "#0000ff",
       timestamp: "2022-02-23T14:14:23.202015Z",

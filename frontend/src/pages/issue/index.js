@@ -1,4 +1,6 @@
 import * as React from "react";
+import { Link } from "react-router-dom";
+import { links } from "../../constants/frontend-urls";
 import {
   Button,
   List,
@@ -18,18 +20,20 @@ import IssueTag from "../../components/common/issue-tag";
 import UserAvatar from "../../components/common/user-avatar";
 import IssuePriority from "../../components/common/issue-priority";
 import "./styles.css";
+import { issueData } from "../../mocks/";
 
-const Issue = (props) => {
-  console.log(props.issue);
+const Issue = () => {
   return (
     <div className="issue-container">
-      <h3>{props.issue.title}</h3>
+      <h3>{issueData.title}</h3>
       <Divider />
       <div className="issue-container-reporter">
         <div className="issue-container-info-left">
           <div>REPORTED BY</div>
           <div>
-            <UserAvatar user={props.issue.reporter} />
+            <Link to={links.USER(issueData.reporter.id)}>
+              <UserAvatar user={issueData.reporter} />
+            </Link>
           </div>
         </div>
         <div className="issue-container-info-right">
@@ -41,40 +45,44 @@ const Issue = (props) => {
       <div className="issue-container-info-left">
         <div>TAGS</div>
         <div className="issue-container-assignee">
-        {props.issue.tags.map((tag, index) => {
-          return <IssueTag tag={tag} index={index} />;
-        })}
+          {issueData.tags.map((tag, index) => {
+            return <IssueTag tag={tag} index={index} />;
+          })}
         </div>
       </div>
       <Divider />
       <div className="issue-container-reporter">
         <div className="issue-container-info-left">
           <div>STATUS</div>
-          <IssueStatus status={props.issue.status} />
+          <IssueStatus status={issueData.status} />
         </div>
         <div className="issue-container-info-right">
           <div>PRIORITY</div>
-          <IssuePriority priority={props.issue.priority} />
+          <IssuePriority priority={issueData.priority} />
         </div>
       </div>
       <Divider />
       <div className="issue-container-info-left">
         <div>ASSIGNEES</div>
         <div className="issue-container-assignee">
-          {props.issue.assignee.map((user, index) => {
-            return <UserAvatar user={user} />;
+          {issueData.assignee.map((user, index) => {
+            return (
+              <Link to={links.USER(user.id)}>
+                <UserAvatar user={user} />
+              </Link>
+            );
           })}
         </div>
       </div>
       <Divider />
       <div className="issue-container-info-left">
         <div>DESCRIPTION</div>
-        <div dangerouslySetInnerHTML={{ __html: props.issue.description }} />
+        <div dangerouslySetInnerHTML={{ __html: issueData.description }} />
       </div>
       <Divider />
       <div className="issue-container-info-left">
         <div>COMMENTS</div>
-        {props.issue.comments.map((comment, index) => {
+        {issueData.comments.map((comment, index) => {
           return (
             <div className="issue-container-comment-box">
               <Avatar src={comment.commenter.avatar} />

@@ -21,11 +21,12 @@ import UserAvatar from "../../components/common/user-avatar";
 import IssuePriority from "../../components/common/issue-priority";
 import IssueStatus from "../../components/common/issue-status";
 import "./styles.css";
+import { projectListData, issueListData, userListData } from "../../mocks/";
 
 const User = (props) => {
   const [value, setValue] = React.useState("1");
 
-  const { userData, userProjects, userIssues } = props;
+  const userData = userListData[0];
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -48,7 +49,7 @@ const User = (props) => {
           <Tab label="ISSUES ASSIGNED" value="3" />
         </TabList>
         <TabPanel value="1">
-          {userProjects.map((project, index) => {
+          {projectListData.map((project, index) => {
             return (
               <div key={index} className="user-container-user-info">
                 <Avatar src={project.image} />
@@ -61,7 +62,7 @@ const User = (props) => {
           })}
         </TabPanel>
         <TabPanel value="2">
-          {userIssues.map((issue, index) => {
+          {issueListData.map((issue, index) => {
             return (
               <ListItem button key={"text"} className="issue-list-item">
                 <IssueStatus status={issue.status} />
@@ -83,7 +84,7 @@ const User = (props) => {
           })}
         </TabPanel>
         <TabPanel value="3">
-          {userIssues.map((issue, index) => {
+          {issueListData.map((issue, index) => {
             return (
               <ListItem button key={"text"} className="issue-list-item">
                 <IssueStatus status={issue.status} />

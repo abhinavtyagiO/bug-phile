@@ -18,13 +18,14 @@ import IssueTag from "../../components/common/issue-tag";
 import UserAvatar from "../../components/common/user-avatar";
 import IssuePriority from "../../components/common/issue-priority";
 import "./styles.css";
+import { userListData } from "../../mocks/";
 
 const UsersList = (props) => {
   return (
     <div className="users-list-container">
       <h3>Users</h3>
       <Divider />
-      {props.usersList.map((user, index) => {
+      {userListData.map((user, index) => {
         return (
           <div key={index} className="users-list-container-user">
             <div className="users-list-container-user-avatar">

@@ -1,4 +1,5 @@
-import * as React from "react";
+import React from "react";
+import { Link } from "react-router-dom";
 import {
   Button,
   List,
@@ -15,6 +16,7 @@ import AddIcon from "@mui/icons-material/Add";
 import IssueListItem from "./IssueListItem";
 import "./styles.css";
 import AddIssueWithModal from "../add-issue-with-modal";
+import { links } from "../../constants/frontend-urls";
 
 const drawerWidth = 240;
 
@@ -32,9 +34,10 @@ const IssueList = (props) => {
         <AddIssueWithModal />
       </div>
       <List>
-        {
-          props.issues.map((issue, index) => (
+        {props.issues.map((issue, index) => (
+          <Link to={links.ISSUE(issue.project.id, issue.id)}>
             <IssueListItem key={index} issue={issue} />
+          </Link>
         ))}
       </List>
     </div>

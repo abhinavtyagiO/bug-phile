@@ -7,13 +7,8 @@ import Project from "../pages/project";
 import Dashboard from "../pages/dashboard";
 import UsersList from "../pages/users_list";
 import User from "../pages/user";
-import {
-  projectListData,
-  issueListData,
-  userListData,
-  issueData,
-  projectData,
-} from "../mocks/";
+import { projectListData, issueListData } from "../mocks/";
+import Routes from '../routes'
 
 import "./styles.css";
 
@@ -22,7 +17,7 @@ const Layout = () => {
     <Grid sx={{ display: "flex" }} className="content-grid">
       <ProjectList projects={projectListData} />
       <IssueList issues={issueListData} />
-      <User userData={userListData[0]} userProjects={projectListData} userIssues={issueListData}  />
+      <Routes />
     </Grid>
   );
 };

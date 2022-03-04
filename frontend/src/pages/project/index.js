@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Link } from "react-router-dom";
 import { projectStatsList } from "../../mocks";
 import ProjectStats from "../../components/project-stats";
 import {
@@ -16,17 +17,21 @@ import IssueTag from "../../components/common/issue-tag";
 import UserAvatar from "../../components/common/user-avatar";
 import IssuePriority from "../../components/common/issue-priority";
 import "./styles.css";
+import { projectData } from "../../mocks/";
+import { links } from "../../constants/frontend-urls";
 
-const Project = (props) => {
+const Project = () => {
   return (
     <div className="project-container">
-      <h3>{props.project.name}</h3>
+      <h3>{projectData.name}</h3>
       <Divider />
       <div className="project-container-reporter">
         <div className="project-container-info-left">
           <div>CREATED BY</div>
           <div>
-            <UserAvatar user={props.project.creator} />
+            <Link to={links.USER(projectData.creator.id)}>
+              <UserAvatar user={projectData.creator} />
+            </Link>
           </div>
         </div>
         <div className="project-container-info-right">
@@ -39,7 +44,7 @@ const Project = (props) => {
         <div className="project-container-info-left">
           <div>STATUS</div>
           <div>
-            <ProjectStatus status={props.project.status} />
+            <ProjectStatus status={projectData.status} />
           </div>
         </div>
       </div>
@@ -47,15 +52,19 @@ const Project = (props) => {
       <div className="project-container-info-left">
         <div>MEMBERS</div>
         <div>
-          {props.project.members.map((member, index) => {
-            return <UserAvatar user={member} />;
+          {projectData.members.map((member, index) => {
+            return (
+              <Link to={links.USER(member.id)}>
+                <UserAvatar user={member} />
+              </Link>
+            );
           })}
         </div>
       </div>
       <Divider />
       <div className="project-container-info-left">
         <div>DESCRIPTION</div>
-        <div dangerouslySetInnerHTML={{__html: props.project.description}} />
+        <div dangerouslySetInnerHTML={{ __html: projectData.description }} />
       </div>
       <Divider />
       <div className="project-container-info-left">
