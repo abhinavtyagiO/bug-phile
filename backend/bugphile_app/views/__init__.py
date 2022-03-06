@@ -7,3 +7,6 @@ from .issue_tag import IssueTagViewSet
 from .issue import IssueViewSet
 from .comment import CommentViewSet
 from .oauth import OAuthView
+from .user_things.user_projects import UserProjectsViewSet
+from .user_things.user_issues_assigned import UserIssuesAssignedViewSet
+from .user_things.user_issues_reported import UserIssuesReportedViewSet

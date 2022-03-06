@@ -6,21 +6,21 @@ class CommentSerializer(serializers.ModelSerializer):
     commenter_details = serializers.SerializerMethodField()
 
     def get_commenter_details(self, obj):
-        role = ''
+        type = ''
 
-        if obj.commenter in obj.issue.project.members:
-            role = 'Project Member'
-        if obj.commenter == obj.issue.assignee:
-            role = 'Assignee'
-        if obj.commenter == obj.issue.reporter:
-            role = 'Reporter'
+        if obj.issue.project.members.filter(id=obj.commenter.id).exists():
+            type = 'Project Member'
+        if obj.issue.assignee.filter(id=obj.commenter.id).exists():
+            type = 'Assignee'
+        if obj.commenter.id == obj.issue.reporter.id:
+            type = 'Reporter'
             
 
         data = {
             'id': obj.commenter.id,
             'name': obj.commenter.name,
-            'avatar': obj.commenter.avatar,
-            'role': role
+            'avatar': obj.commenter.avatar.url,
+            'type': type
         }
         return data
 

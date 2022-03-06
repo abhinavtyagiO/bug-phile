@@ -1,18 +1,16 @@
 from rest_framework.decorators import permission_classes
 from rest_framework.permissions import IsAuthenticated
-from bugphile_app.api.serializers.project import ProjectSerializer, Project
+from bugphile_app.models import User
+from bugphile_app.api.serializers import UserIssuesAssignedSerializer
 from rest_framework import viewsets
 from bugphile_app.permissions import IsMasterOrReadOnly, IsProjectCreatorOrMemberOrReadOnly
 
 
-class ProjectViewSet(viewsets.ModelViewSet):
+class UserIssuesAssignedViewSet(viewsets.ModelViewSet):
     """
-    A ViewSet for viewing and creating projects.
+    A ViewSet for viewing issues that the user are assigned for.
     """
-    queryset = Project.objects.all()
-    serializer_class = ProjectSerializer
+    serializer_class = UserIssuesAssignedSerializer
+    queryset = User.objects.all()
     permission_classes = [IsAuthenticated & (
         IsMasterOrReadOnly | IsProjectCreatorOrMemberOrReadOnly)]
-
-    def perform_create(self, serializer):
-        serializer.save(creator=self.request.user)

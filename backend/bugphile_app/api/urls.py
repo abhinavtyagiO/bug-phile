@@ -11,6 +11,9 @@ router.register(r'issue_priority', IssuePriorityViewSet, basename='issue_priorit
 router.register(r'comments', CommentViewSet, basename='comments')
 router.register(r'tags', IssueTagViewSet, basename='tags')
 router.register(r'issue_status', IssueStatusViewSet, basename='issue_status')
+router.register(r'user_projects', UserProjectsViewSet, basename='user_projects')
+router.register(r'user_issues_assigned', UserIssuesAssignedViewSet, basename='user_issues_assigned')
+router.register(r'user_issues_reported', UserIssuesReportedViewSet, basename='user_issues_reported')
 urlpatterns = router.urls
 
 urlpatterns += [

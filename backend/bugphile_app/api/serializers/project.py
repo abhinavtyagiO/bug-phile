@@ -1,10 +1,11 @@
 from rest_framework import serializers
 from bugphile_app.models import Project
-from bugphile_app.api.serializers import ProjectStatusSerializer
+from bugphile_app.api.serializers import ProjectStatusSerializer, UserSerializer
 
 class ProjectSerializer(serializers.ModelSerializer):
     members = serializers.SerializerMethodField()
     status = ProjectStatusSerializer()
+    creator = UserSerializer()
     # image = serializers.SerializerMethodField()
 
     def get_members(self, obj):

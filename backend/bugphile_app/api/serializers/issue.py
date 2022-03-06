@@ -8,8 +8,10 @@ from bugphile_app.api.serializers import (
     IssueTagSerializer,
 )
 
+
 class IssueSerializer(serializers.ModelSerializer):
     assignee = UserSerializer(many=True)
+    reporter = UserSerializer()
     project = serializers.SerializerMethodField()
     status = IssueStatusSerializer()
     priority = IssuePrioritySerializer()
@@ -17,11 +19,11 @@ class IssueSerializer(serializers.ModelSerializer):
 
     def get_project(self, obj):
         data = {
+            'id': obj.project.id,
             'name': obj.project.name,
             'image': obj.project.image.url,
         }
         return data
-
 
     class Meta:
         model = Issue
