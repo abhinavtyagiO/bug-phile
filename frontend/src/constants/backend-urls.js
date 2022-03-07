@@ -23,3 +23,11 @@ export const COMMENT = (id) => `${COMMENTS()}${id}/`;
  
 export const PROJECT_STATUSES = () => `${API_ROOT()}project_status/`;
 export const PROJECT_STATUS = (id) => `${PROJECT_STATUSES()}${id}/`;
+
+export const USER_PROJECTS = (id) => `${API_ROOT()}user_projects/${id}/`
+
+export const USER_ISSUES_ASSIGNED = (id) => `${API_ROOT()}user_issues_assigned/${id}/`
+
+export const USER_ISSUES_REPORTED = (id) => `${API_ROOT()}user_issues_reported/${id}/`
+
+export const PROJECT_ISSUES = (id) => `${API_ROOT()}project_issues?project-id=${id}/`

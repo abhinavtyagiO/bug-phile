@@ -15,7 +15,7 @@ const IssueListItem = (props) => {
           {issue.title} • <span>31/01/2022</span>
         </div>
         <div className="issue-list-item-content-reporter">
-          By: {issue.reporter}
+          By: {issue.reporter.name}
         </div>
         <div className="issue-list-item-content-tags">
           {issueTags.map((tag, index) => {

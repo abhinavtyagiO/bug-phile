@@ -1,7 +1,8 @@
-import * as React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import { projectStatsList } from "../../mocks";
 import ProjectStats from "../../components/project-stats";
+import axios from "axios";
 import {
   Button,
   List,
@@ -11,6 +12,7 @@ import {
   ListItemIcon,
   ListItemText,
   Avatar,
+  CircularProgress,
 } from "@mui/material";
 import ProjectStatus from "../../components/common/project-status";
 import IssueTag from "../../components/common/issue-tag";
@@ -19,18 +21,57 @@ import IssuePriority from "../../components/common/issue-priority";
 import "./styles.css";
 import { projectData } from "../../mocks/";
 import { links } from "../../constants/frontend-urls";
+import { PROJECT } from "../../constants/backend-urls";
 
 const Project = () => {
-  return (
+  const { id } = useParams();
+  const [project, setProject] = useState();
+  const [apiCall, setApiCall] = useState({
+    isLoading: false,
+    error: false,
+  });
+
+  const fetchProject = (id) => {
+    setApiCall({
+      isLoading: true,
+      error: false,
+    });
+    axios
+      .get(PROJECT(id))
+      .then((res) => {
+        setProject(res.data);
+        setApiCall({
+          isLoading: false,
+          error: false,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        setApiCall({
+          isLoading: false,
+          error: err,
+        });
+      });
+  };
+
+  useEffect(() => {
+    if (Number.isInteger(parseInt(id))) {
+      fetchProject(id);
+    }
+  }, [id]);
+
+  console.log(project);
+
+  return !apiCall.isLoading && project ? (
     <div className="project-container">
-      <h3>{projectData.name}</h3>
+      <h3>{project.name}</h3>
       <Divider />
       <div className="project-container-reporter">
         <div className="project-container-info-left">
           <div>CREATED BY</div>
           <div>
-            <Link to={links.USER(projectData.creator.id)}>
-              <UserAvatar user={projectData.creator} />
+            <Link to={links.USER(project.creator.id)}>
+              <UserAvatar user={project.creator} />
             </Link>
           </div>
         </div>
@@ -44,7 +85,7 @@ const Project = () => {
         <div className="project-container-info-left">
           <div>STATUS</div>
           <div>
-            <ProjectStatus status={projectData.status} />
+            <ProjectStatus status={project.status} />
           </div>
         </div>
       </div>
@@ -52,7 +93,7 @@ const Project = () => {
       <div className="project-container-info-left">
         <div>MEMBERS</div>
         <div>
-          {projectData.members.map((member, index) => {
+          {project.members.map((member, index) => {
             return (
               <Link to={links.USER(member.id)}>
                 <UserAvatar user={member} />
@@ -64,7 +105,7 @@ const Project = () => {
       <Divider />
       <div className="project-container-info-left">
         <div>DESCRIPTION</div>
-        <div dangerouslySetInnerHTML={{ __html: projectData.description }} />
+        <div dangerouslySetInnerHTML={{ __html: project.description }} />
       </div>
       <Divider />
       <div className="project-container-info-left">
@@ -72,6 +113,8 @@ const Project = () => {
         <ProjectStats stats={projectStatsList} />
       </div>
     </div>
+  ) : (
+    <CircularProgress />
   );
 };
 
