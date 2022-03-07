@@ -5,3 +5,10 @@ class IssueStatusSerializer(serializers.ModelSerializer):
     class Meta:
         model = IssueStatus
         fields = '__all__'
+
+class IssueStatusStatsSerializer(IssueStatusSerializer):
+    num_issues = serializers.IntegerField()
+
+    class Meta:
+        model = IssueStatusSerializer.Meta.model
+        fields = '__all__'

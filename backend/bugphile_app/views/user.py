@@ -3,7 +3,7 @@ from rest_framework.response import Response
 import requests
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated, AllowAny
-from bugphile_app.api.serializers import UserIssuesAssignedSerializer
+from bugphile_app.api.serializers import UserSerializer
 from bugphile_app.models import User
 from bugphile_app.permissions import IsMasterOrReadOnly
 from rest_framework.authentication import BasicAuthentication, SessionAuthentication
@@ -15,7 +15,7 @@ class UserViewSet(viewsets.ModelViewSet):
     A viewset to login or signup users.
     """
 
-    serializer_class = UserIssuesAssignedSerializer
+    serializer_class = UserSerializer
     queryset = User.objects.all()
     permission_classes = [IsAuthenticated & IsMasterOrReadOnly]
 
