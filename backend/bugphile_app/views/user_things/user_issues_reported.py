@@ -6,7 +6,7 @@ from rest_framework import viewsets
 from bugphile_app.permissions import IsMasterOrReadOnly, IsProjectCreatorOrMemberOrReadOnly
 
 
-class UserIssuesReportedViewSet(viewsets.ModelViewSet):
+class UserIssuesReportedViewSet(viewsets.ReadOnlyModelViewSet):
     """
     A ViewSet for viewing issues the user has reported.
     """
