@@ -19,4 +19,7 @@ urlpatterns = router.urls
 urlpatterns += [
     path(r'oauth', OAuthView.as_view()),
     path(r'project_issues', ProjectIssuesStatsView.as_view()),
+    path(r'project_stats', ProjectStatsView.as_view()),
+    path(r'users_stats', UserStatsView.as_view()),
+
 ]

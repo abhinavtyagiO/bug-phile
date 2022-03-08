@@ -15,3 +15,11 @@ class UserSerializer(serializers.ModelSerializer):
         read_only_fields = [
             'id',
         ]
+
+class UserStatsSerializer(UserSerializer):
+    num_issues = serializers.IntegerField()
+
+    class Meta:
+        model = UserSerializer.Meta.model
+        fields = '__all__'
+

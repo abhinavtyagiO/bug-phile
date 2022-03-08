@@ -15,22 +15,19 @@ class ProjectIssuesStatsView(APIView):
     def get(self, request):
         project_id = self.request.GET.get('project-id', None)
         if project_id is None:
-            return Response(
-                {
-                    "detail": "Project id not provided."
-                },
-                status=status.HTTP_400_BAD_REQUEST
-            )
-        try:
-            project = Project.objects.get(id=project_id)
-        except:
-            return Response(
-                {
-                    "detail": "Not found."
-                },
-                status=status.HTTP_404_NOT_FOUND
-            )
-        num_issues = Count('issue', filter=Q(issue__project__id=project.id))
+            num_issues = Count('issue')
+        else:
+            try:
+                project = Project.objects.get(id=project_id)
+            except:
+                return Response(
+                    {
+                        "detail": "Not found."
+                    },
+                    status=status.HTTP_404_NOT_FOUND
+                )
+            num_issues = Count('issue', filter=Q(
+                issue__project__id=project.id))
         issue_statuses = IssueStatus.objects.annotate(num_issues=num_issues)
         serializer = IssueStatusStatsSerializer(issue_statuses, many=True)
         data = serializer.data
