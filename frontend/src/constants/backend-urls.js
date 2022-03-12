@@ -30,4 +30,6 @@ export const USER_ISSUES_ASSIGNED = (id) => `${API_ROOT()}user_issues_assigned/$
 
 export const USER_ISSUES_REPORTED = (id) => `${API_ROOT()}user_issues_reported/${id}/`
 
-export const PROJECT_ISSUES = (id) => `${API_ROOT()}project_issues?project-id=${id}/`
+export const PROJECT_ISSUES = (id) => `${API_ROOT()}project_issues?project-id=${id}`
+
+export const PROJECT_STATS = (id) => `${API_ROOT()}project_stats`

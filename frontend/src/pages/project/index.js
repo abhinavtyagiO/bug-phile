@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { projectStatsList } from "../../mocks";
-import ProjectStats from "../../components/project-stats";
+import ProjectIssueStats from "../../components/project-issue-stats";
 import axios from "axios";
 import {
   Button,
@@ -21,11 +21,12 @@ import IssuePriority from "../../components/common/issue-priority";
 import "./styles.css";
 import { projectData } from "../../mocks/";
 import { links } from "../../constants/frontend-urls";
-import { PROJECT } from "../../constants/backend-urls";
+import { PROJECT, PROJECT_ISSUES } from "../../constants/backend-urls";
 
 const Project = () => {
   const { id } = useParams();
   const [project, setProject] = useState();
+  const [projectIssues, setProjectIssues] = useState();
   const [apiCall, setApiCall] = useState({
     isLoading: false,
     error: false,
@@ -54,15 +55,44 @@ const Project = () => {
       });
   };
 
+  const fetchProjectIssues = (id) => {
+    setApiCall({
+      isLoading: true,
+      error: false,
+    });
+    axios
+      .get(PROJECT_ISSUES(id))
+      .then((res) => {
+        setProjectIssues(res.data);
+        setApiCall({
+          isLoading: false,
+          error: false,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        setApiCall({
+          isLoading: false,
+          error: err,
+        });
+      });
+  };
+
   useEffect(() => {
     if (Number.isInteger(parseInt(id))) {
       fetchProject(id);
     }
   }, [id]);
 
-  console.log(project);
+  useEffect(() => {
+    if (Number.isInteger(parseInt(id))) {
+      fetchProjectIssues(id);
+    }
+  }, [id]);
 
-  return !apiCall.isLoading && project ? (
+  console.log(projectIssues);
+
+  return !apiCall.isLoading && project && projectIssues ? (
     <div className="project-container">
       <h3>{project.name}</h3>
       <Divider />
@@ -110,7 +140,7 @@ const Project = () => {
       <Divider />
       <div className="project-container-info-left">
         <div>ISSUE STATS</div>
-        <ProjectStats stats={projectStatsList} />
+        <ProjectIssueStats stats={projectIssues} />
       </div>
     </div>
   ) : (

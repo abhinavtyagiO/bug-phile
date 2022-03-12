@@ -1,4 +1,5 @@
-import * as React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 // import "chart.js";
 import {
   Button,
@@ -9,6 +10,7 @@ import {
   ListItemIcon,
   ListItemText,
   Avatar,
+  CircularProgress,
 } from "@mui/material";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
@@ -18,6 +20,7 @@ import AddIcon from "@mui/icons-material/Add";
 import "./styles.css";
 import ProjectStats from "../../components/project-stats";
 import { dashboardProjectStatsList } from "../../mocks";
+import { PROJECT_STATS } from "../../constants/backend-urls";
 
 const data = {
   labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
@@ -47,11 +50,46 @@ const data = {
 };
 
 const Dashboard = () => {
-  return (
+  const [projectStats, setProjectStats] = useState();
+  const [apiCall, setApiCall] = useState({
+    isLoading: false,
+    error: false,
+  });
+
+  const fetchProjectStats = () => {
+    setApiCall({
+      isLoading: true,
+      error: false,
+    });
+    axios
+      .get(PROJECT_STATS())
+      .then((res) => {
+        setProjectStats(res.data);
+        setApiCall({
+          isLoading: false,
+          error: false,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        setApiCall({
+          isLoading: false,
+          error: err,
+        });
+      });
+  };
+
+  useEffect(() => {
+    fetchProjectStats();
+  }, []);
+
+  console.log(projectStats);
+
+  return !apiCall.isLoading && projectStats ? (
     <div className="dashboard-container">
       <div className="dashboard-container-info-left">
         <div>PROJECT STATS</div>
-        <ProjectStats stats={dashboardProjectStatsList} />
+        <ProjectStats stats={projectStats} />
       </div>
       <Divider />
       <div className="dashboard-container-graph-container">
@@ -63,6 +101,8 @@ const Dashboard = () => {
         </div>
       </div>
     </div>
+  ) : (
+    <CircularProgress />
   );
 };
 
