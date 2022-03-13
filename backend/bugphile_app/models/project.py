@@ -4,7 +4,7 @@ from ckeditor.fields import RichTextField
 from bugphile_app.models import ProjectStatus, User
 
 class Project(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, unique=True)
     creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name='projects_created')
     members = models.ManyToManyField(User, related_name='projects')
     timestamp = models.DateTimeField(auto_now_add=True)
