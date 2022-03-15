@@ -21,8 +21,6 @@ import { AddProjectSchema } from "./validation";
 const AddProjectForm = () => {
   const [data, setData] = useState({});
   const [errors, setErrors] = useState({});
-  const [MemberName, setMemberName] = useState([]);
-  const [Status, setStatus] = useState();
   const [users, setUsers] = useState([]);
   const [projectStatuses, setProjectStatuses] = useState([]);
 
@@ -86,8 +84,6 @@ const AddProjectForm = () => {
         setErrors(errObj);
       });
   };
-
-  console.log(data);
 
   return (
     <div>
