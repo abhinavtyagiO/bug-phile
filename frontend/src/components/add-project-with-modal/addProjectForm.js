@@ -11,18 +11,32 @@ import {
 } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Cookies from "js-cookie";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import { PROJECT_STATUSES, USERS } from "../../constants/backend-urls";
+import {
+  API_ROOT,
+  PROJECTS,
+  PROJECT_STATUSES,
+  USERS,
+} from "../../constants/backend-urls";
 import { URL_REGEX } from "../../constants/regex";
 import { isValidUrl } from "../../utils/regex";
 import { AddProjectSchema } from "./validation";
 
 const AddProjectForm = () => {
-  const [data, setData] = useState({});
+  const [data, setData] = useState({
+    name: null,
+    description: null,
+    members: [],
+    status: null,
+    link: null,
+  });
   const [errors, setErrors] = useState({});
   const [users, setUsers] = useState([]);
   const [projectStatuses, setProjectStatuses] = useState([]);
+  const [projectLogo, setProjectLogo] = useState(null);
+  const csrftoken = Cookies.get("csrftoken");
 
   const fetchUsers = () => {
     axios
@@ -67,6 +81,12 @@ const AddProjectForm = () => {
       ...data,
       [name]: value,
     });
+    console.log(data);
+  };
+
+  const handleLogoChange = (event) => {
+    console.log(event);
+    setProjectLogo(event.target.files[0]);
   };
 
   const validateForm = (e) => {
@@ -74,9 +94,36 @@ const AddProjectForm = () => {
     AddProjectSchema.validate(data, { abortEarly: false })
       .then(() => {
         setErrors({});
+        const formData = new FormData();
+
+        formData.append("name", data.name);
+        formData.append("status", data.status);
+        console.log(projectLogo);
+        projectLogo && formData.append("image", projectLogo);
+        data.link && formData.append("link", data.link);
+        data.description && formData.append("description", data.description);
+
+        data.members.forEach((item) => {
+          formData.append("members", JSON.stringify(item));
+        });
+
+        axios
+          .post(PROJECTS(), formData, {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              "X-CSRFToken": csrftoken,
+            },
+          })
+          .then((res) => {
+            console.log(res);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       })
       .catch((err) => {
         let errObj = {};
+        console.log(err);
         err.inner.forEach((e) => {
           errObj[e.path] = e.message;
         });
@@ -97,9 +144,19 @@ const AddProjectForm = () => {
           onChange={handleChange}
           fullWidth
         />
+        <FormControl>
+          <Typography>Logo</Typography>
 
-        <Typography>Logo</Typography>
-        <input type="file" accept="image/*" name="image" />
+          <input
+            type="file"
+            accept="image/*"
+            name="image"
+            onChange={handleLogoChange}
+          />
+          {/* {errors.hasOwnProperty("logo") && (
+            <FormHelperText>{errors["logo"]}</FormHelperText>
+          )} */}
+        </FormControl>
 
         <Typography>Description</Typography>
         <CKEditor
@@ -129,7 +186,7 @@ const AddProjectForm = () => {
           <Typography>Status</Typography>
           <Select
             name="status"
-            value={data.status}
+            value={data.status || []}
             error={errors.hasOwnProperty("status") ? true : false}
             helperText={errors.hasOwnProperty("status") ? errors["status"] : ""}
             onChange={handleChange}

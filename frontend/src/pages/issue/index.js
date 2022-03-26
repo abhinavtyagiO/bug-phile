@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { links } from "../../constants/frontend-urls";
 import axios from "axios";
+import Cookies from "js-cookie";
 import {
   Button,
   List,
@@ -24,33 +25,40 @@ import IssuePriority from "../../components/common/issue-priority";
 import "./styles.css";
 import { issueData } from "../../mocks/";
 import { ISSUE, COMMENT, COMMENTS } from "../../constants/backend-urls";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
 const Issue = () => {
   const { issueId } = useParams();
   const [issue, setIssue] = useState();
   const [comments, setComments] = useState();
-  const [apiCall, setAPiCall] = useState({
+  const [apiCall, setApiCall] = useState({
     isLoading: false,
     error: false,
   });
+  const csrftoken = Cookies.get("csrftoken");
 
   const fetchIssue = (issueId) => {
-    setAPiCall({
+    setApiCall({
       isLoading: true,
       error: false,
     });
     axios
-      .get(ISSUE(issueId))
+      .get(ISSUE(issueId), {
+        // headers: {
+        //   "X-CSRFToken": csrftoken,
+        // },
+      })
       .then((res) => {
         setIssue(res.data);
-        setAPiCall({
+        setApiCall({
           isLoading: false,
           error: false,
         });
       })
       .catch((err) => {
         console.log(err);
-        setAPiCall({
+        setApiCall({
           isLoading: false,
           error: err,
         });
@@ -67,6 +75,8 @@ const Issue = () => {
         console.log(err);
       });
   };
+
+  const handleEditorChange = (e, editor) => {};
 
   useEffect(() => {
     fetchIssue(issueId);
@@ -143,7 +153,9 @@ const Issue = () => {
               <Avatar src={comment.commenterDetails.avatar} />
               <div className="issue-container-comment-content">
                 <div className="">
-                  <Link to={links.USER(comment.commenter)}>{comment.commenterDetails.name}</Link>
+                  <Link to={links.USER(comment.commenter)}>
+                    {comment.commenterDetails.name}
+                  </Link>
                   <span>• {comment.timestamp}</span>
                 </div>
                 <div
@@ -154,6 +166,14 @@ const Issue = () => {
             </div>
           );
         })}
+      </div>
+      <Divider />
+      <div className="issue-container-info-left">
+        <div>ADD A COMMENT</div>
+        <CKEditor
+          editor={ClassicEditor}
+          onChange={handleEditorChange}
+        ></CKEditor>
       </div>
     </div>
   ) : (

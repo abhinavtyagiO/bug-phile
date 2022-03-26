@@ -2,7 +2,16 @@ from rest_framework import serializers
 from bugphile_app.models import Project
 from bugphile_app.api.serializers import ProjectStatusSerializer, UserSerializer
 
+
 class ProjectSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Project
+        fields = '__all__'
+        read_only_fields = ['creator']
+
+
+class ProjectReadSerializer(ProjectSerializer):
     members = serializers.SerializerMethodField()
     status = ProjectStatusSerializer()
     creator = UserSerializer()
@@ -22,9 +31,3 @@ class ProjectSerializer(serializers.ModelSerializer):
     # def get_image(self, obj):
     #     url = obj.image.url
     #     return url
-
-
-    class Meta:
-        model = Project
-        fields = '__all__'
-

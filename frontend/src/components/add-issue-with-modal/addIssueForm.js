@@ -13,7 +13,9 @@ import React, { useEffect, useState } from "react";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import axios from "axios";
+import Cookies from "js-cookie";
 import {
+  ISSUES,
   ISSUE_PRIORITIES,
   ISSUE_STATUSES,
   ISSUE_TAGS,
@@ -34,6 +36,7 @@ const AddIssueForm = () => {
   const [issueStatuses, setIssueStatuses] = useState([]);
   const [issuePriorities, setIssuePriorities] = useState([]);
   const [issueTags, setIssueTags] = useState([]);
+  const csrftoken = Cookies.get("csrftoken");
 
   const fetchUsers = () => {
     axios
@@ -106,6 +109,26 @@ const AddIssueForm = () => {
     AddIssueSchema.validate(data, { abortEarly: false })
       .then(() => {
         setErrors({});
+        const formData = new FormData();
+        formData.append("title", data["name"]);
+        formData.append("description", data["description"]);
+        formData.append("assignees", data["assignees"]);
+        formData.append("status", data["status"]);
+        formData.append("tags", data["tags"]);
+        formData.append("priority", data["priority"]);
+        axios
+          .post(ISSUES(), formData, {
+            headers: {
+              "Content-Type": "application/json",
+              "X-CSRFToken": csrftoken,
+            },
+          })
+          .then((res) => {
+            console.log(res);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       })
       .catch((err) => {
         let errObj = {};
