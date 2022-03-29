@@ -36,7 +36,7 @@ const Issue = () => {
     isLoading: false,
     error: false,
   });
-  const csrftoken = Cookies.get("csrftoken");
+  const [editorData, setEditorData] = useState();
 
   const fetchIssue = (issueId) => {
     setApiCall({
@@ -44,11 +44,7 @@ const Issue = () => {
       error: false,
     });
     axios
-      .get(ISSUE(issueId), {
-        // headers: {
-        //   "X-CSRFToken": csrftoken,
-        // },
-      })
+      .get(ISSUE(issueId))
       .then((res) => {
         setIssue(res.data);
         setApiCall({
@@ -76,7 +72,12 @@ const Issue = () => {
       });
   };
 
-  const handleEditorChange = (e, editor) => {};
+  const handleEditorChange = (e, editor) => {
+    setEditorData(editor.getData());
+    console.log(editorData);
+  };
+
+  const addComment = () => {};
 
   useEffect(() => {
     fetchIssue(issueId);
@@ -85,8 +86,6 @@ const Issue = () => {
   useEffect(() => {
     fetchComments(issueId);
   }, []);
-
-  console.log(issue);
 
   return !apiCall.isLoading && issue && comments ? (
     <div className="issue-container">
@@ -175,6 +174,9 @@ const Issue = () => {
           onChange={handleEditorChange}
         ></CKEditor>
       </div>
+      <Button type="submit" variant="contained" onClick={addComment}>
+        Add Issue
+      </Button>
     </div>
   ) : (
     <CircularProgress />
