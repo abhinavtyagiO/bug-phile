@@ -31,7 +31,12 @@
 }
 
 .issue-list-item-content-tags {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.issue-list-scrollable {
+  overflow-y: auto;
+  height: calc(100vh - 64px - 68.5px - 16px);
 }

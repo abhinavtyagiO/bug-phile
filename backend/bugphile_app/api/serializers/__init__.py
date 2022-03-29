@@ -3,7 +3,7 @@ from .user import UserSerializer, UserStatsSerializer
 from .issue_priority import IssuePrioritySerializer
 from .issue_status import IssueStatusSerializer, IssueStatusStatsSerializer
 from .issue_tag import IssueTagSerializer
-from .issue import IssueSerializer
+from .issue import IssueReadSerializer, IssueSerializer
 from .project_status import ProjectStatusSerializer, ProjectStatusStatsSerializer
 from .project import ProjectSerializer, ProjectReadSerializer
 from .user_things.user_projects import UserProjectsSerializer

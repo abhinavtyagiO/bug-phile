@@ -10,6 +10,14 @@ from bugphile_app.api.serializers import (
 
 
 class IssueSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Issue
+        fields = '__all__'
+        read_only_fields = ["reporter"]
+
+
+class IssueReadSerializer(IssueSerializer):
     assignee = UserSerializer(many=True)
     reporter = UserSerializer()
     project = serializers.SerializerMethodField()
@@ -24,10 +32,6 @@ class IssueSerializer(serializers.ModelSerializer):
             'image': obj.project.image.url,
         }
         return data
-
-    class Meta:
-        model = Issue
-        fields = '__all__'
 
 
 class IssueDetailSerializer(IssueSerializer):

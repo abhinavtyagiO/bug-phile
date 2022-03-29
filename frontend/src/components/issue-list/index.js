@@ -54,7 +54,7 @@ const IssueList = (props) => {
         </Button>
         <AddIssueWithModal />
       </div>
-      <List>
+      <List className="issue-list-scrollable">
         {issues.map((issue, index) => (
           <Link to={links.ISSUE(issue.project.id, issue.id)}>
             <IssueListItem key={index} issue={issue} />

@@ -47,7 +47,7 @@ const ProjectList = (props) => {
       <div className="add-project-btn">
         <AddProjectWithModal />
       </div>
-      <List>
+      <List className="project-list-scrollable" >
         {projects.map((project, index) => (
           <div>
             <Link to={links.PROJECT(project.id)}>

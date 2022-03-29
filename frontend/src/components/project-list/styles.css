@@ -32,3 +32,8 @@
 .project-list-item-image {
   width: 3rem;
 }
+
+.project-list-scrollable {
+  overflow-y: auto;
+  height: calc(100vh - 64px - 68.5px - 16px);
+}

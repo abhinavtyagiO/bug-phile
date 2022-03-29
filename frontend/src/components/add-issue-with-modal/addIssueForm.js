@@ -10,6 +10,7 @@ import {
   FormHelperText,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import axios from "axios";
@@ -19,24 +20,31 @@ import {
   ISSUE_PRIORITIES,
   ISSUE_STATUSES,
   ISSUE_TAGS,
+  PROJECTS,
   USERS,
 } from "../../constants/backend-urls";
 import { AddIssueSchema } from "./validation";
 
-const priorities = ["high", "moderate", "low"];
-
-const tags = ["quality", "UI-UX", "feature-request", "bug"];
-
-const statuses = ["pending", "resolved", "rejected", "closed"];
-
 const AddIssueForm = () => {
-  const [data, setData] = useState({});
+  const { projectId } = useParams();
+  const [data, setData] = useState({
+    title: null,
+    description: null,
+    assignees: [],
+    tags: [],
+    status: null,
+    priority: null,
+    project: null,
+  });
   const [errors, setErrors] = useState({});
   const [users, setUsers] = useState([]);
   const [issueStatuses, setIssueStatuses] = useState([]);
   const [issuePriorities, setIssuePriorities] = useState([]);
   const [issueTags, setIssueTags] = useState([]);
+  const [projects, setProjects] = useState([]);
   const csrftoken = Cookies.get("csrftoken");
+
+  console.log(projectId);
 
   const fetchUsers = () => {
     axios
@@ -79,13 +87,26 @@ const AddIssueForm = () => {
         console.log(err);
       });
   };
+  const fetchProjects = () => {
+    axios
+      .get(PROJECTS())
+      .then((res) => {
+        setProjects(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   useEffect(() => {
     fetchUsers();
     fetchIssueStatuses();
     fetchIssuePriorities();
     fetchIssueTags();
+    fetchProjects();
   }, []);
+
+  console.log(projects);
 
   const handleChange = (event) => {
     const {
@@ -110,12 +131,21 @@ const AddIssueForm = () => {
       .then(() => {
         setErrors({});
         const formData = new FormData();
-        formData.append("title", data["name"]);
-        formData.append("description", data["description"]);
-        formData.append("assignees", data["assignees"]);
-        formData.append("status", data["status"]);
-        formData.append("tags", data["tags"]);
-        formData.append("priority", data["priority"]);
+        formData.append("title", data.title);
+        formData.append("priority", data.priority);
+
+        data.description && formData.append("description", data.description);
+        data.status && formData.append("status", data.status);
+        data.project && formData.append("project", data.project);
+
+        data.assignees &&
+          data.assignees.forEach((item) => {
+            formData.append("assignee", JSON.stringify(item));
+          });
+        data.tags.forEach((item) => {
+          formData.append("tags", JSON.stringify(item));
+        });
+
         axios
           .post(ISSUES(), formData, {
             headers: {
@@ -171,6 +201,21 @@ const AddIssueForm = () => {
           {users.map((user) => (
             <MenuItem key={user.id} value={user.id}>
               {user.name}
+            </MenuItem>
+          ))}
+        </Select>
+
+        <Typography>Project</Typography>
+        <Select
+          name="project"
+          value={data.project || []}
+          onChange={handleChange}
+          input={<OutlinedInput label="project" />}
+          fullWidth
+        >
+          {projects.map((project) => (
+            <MenuItem key={project.id} value={project.id}>
+              {project.name}
             </MenuItem>
           ))}
         </Select>

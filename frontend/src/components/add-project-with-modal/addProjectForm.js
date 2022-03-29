@@ -98,7 +98,6 @@ const AddProjectForm = () => {
 
         formData.append("name", data.name);
         formData.append("status", data.status);
-        console.log(projectLogo);
         projectLogo && formData.append("image", projectLogo);
         data.link && formData.append("link", data.link);
         data.description && formData.append("description", data.description);
