@@ -4,6 +4,8 @@ export const pages = Object.freeze({
   USER: "/users/:id",
   PROJECT: "/projects/:id",
   ISSUE: "/projects/:projectId/issues/:issueId",
+  SIGNIN: "/signin",
+  ONLOGIN: "/onlogin",
 });
 
 export const links = Object.freeze({
@@ -12,4 +14,6 @@ export const links = Object.freeze({
   USER: (id) => `/users/${id}`,
   PROJECT: (id) => `/projects/${id}`,
   ISSUE: (projectId, issueId) => `/projects/${projectId}/issues/${issueId}`,
+  SIGNIN: () => `/signin`,
+  ONLOGIN: () => `/onlogin`,
 });

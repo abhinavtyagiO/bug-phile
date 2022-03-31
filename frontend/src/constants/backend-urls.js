@@ -17,6 +17,8 @@ export const ISSUE_STATUS = (id) => `${ISSUE_STATUSES()}${id}/`;
 
 export const USERS = () => `${API_ROOT()}users/`;
 export const USER = (id) => `${USERS()}${id}/`;
+export const USER_ON_LOGIN = () => `${USERS()}on_login/`;
+export const USER_ON_LOGOUT = () => `${USERS()}on_logout/`;
 
 export const COMMENTS = () => `${API_ROOT()}comments/`;
 export const COMMENT = (id) => `${COMMENTS()}${id}/`;
@@ -35,3 +37,5 @@ export const PROJECT_ISSUES = (id) => `${API_ROOT()}project_issues?project-id=${
 export const PROJECT_STATS = (id) => `${API_ROOT()}project_stats`
 
 export const ISSUE_TAGS = () => `${API_ROOT()}tags/`
+
+export const WHO_AM_I = () => `${API_ROOT()}who_am_i`

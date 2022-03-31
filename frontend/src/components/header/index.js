@@ -20,6 +20,9 @@ import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import { pages } from "../../constants/frontend-urls";
+import axios from "axios";
+import { USER_ON_LOGOUT } from "../../constants/backend-urls";
+import Cookies from "js-cookie";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -67,6 +70,7 @@ const Header = () => {
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  const csrftoken = Cookies.get("csrftoken");
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -79,6 +83,21 @@ const Header = () => {
   const handleMenuClose = () => {
     setAnchorEl(null);
     handleMobileMenuClose();
+  };
+
+  const handleLogout = () => {
+    axios
+      .post(USER_ON_LOGOUT(), {}, {
+        headers: {
+          "X-CSRFToken": csrftoken,
+        },
+      })
+      .then((res) => {
+        window.location.href = "/signin";
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const handleMobileMenuOpen = (event) => {
@@ -103,7 +122,7 @@ const Header = () => {
       onClose={handleMenuClose}
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={handleLogout}>Logout</MenuItem>
     </Menu>
   );
 

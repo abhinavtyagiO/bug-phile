@@ -1,17 +1,25 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
+import Header from "../components/header";
 import { pages } from "../constants/frontend-urls";
+import Layout from "../layout";
 import * as Components from "../pages";
+import ProtectedRoutes from "./protected-routes";
 
 const BaseRouter = () => {
   return (
     <Routes>
-      <Route exact path={pages.DASHBOARD} element={<Components.Dashboard />} />
-      <Route exact path={pages.USERS} element={<Components.UsersList />} />
-      <Route exact path={pages.USER} element={<Components.User />} />
-      <Route exact path={pages.PROJECT} element={<Components.Project />} />
-      <Route exact path={pages.ISSUE} element={<Components.Issue />} />
-      <Route path="*" element={<div>404</div>} />
+      <Route exact path={pages.SIGNIN} element={<Components.Signin />} />
+      <Route exact path={pages.ONLOGIN} element={<Components.OnLogin />} />
+      <Route
+        path="*"
+        element={
+          <>
+            <Header />
+            <Layout />
+          </>
+        }
+      />
     </Routes>
   );
 };

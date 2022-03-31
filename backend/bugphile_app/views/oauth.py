@@ -14,6 +14,7 @@ CLIENT_SECRET = BASE_CONFIGURATION['keys']['client_secret']
 REDIRECT_URI = BASE_CONFIGURATION['keys']['redirect_uri']
 STATE = BASE_CONFIGURATION['keys']['state']
 
+
 class OAuthView(APIView):
     permission_classes = [AllowAny]
 
@@ -37,7 +38,7 @@ class OAuthView(APIView):
         token_data = token_data.json()
 
         print("token_data", token_data)
-        
+
         access_token = token_data.get("access_token", None)
         refresh_token = token_data.get("refresh_token", None)
 
@@ -57,33 +58,33 @@ class OAuthView(APIView):
         user_data = user_data.json()
 
         print("user_data", user_data)
-        print("family name", user_data.get('family_name',{}))
-        print(User.objects.get(email=user_data.get('email',{})))
+        print("family name", user_data.get('family_name', {}))
+        print(User.objects.get(email=user_data.get('email', {})))
 
         try:
             existing_user = User.objects.get(
-                email=user_data.get('email',{})
+                email=user_data.get('email', {})
             )
         except User.DoesNotExist:
             is_master = False
-            email = user_data.get('email',{})
+            email = user_data.get('email', {})
             full_name = user_data.get('name', {})
             first_name = user_data.get('given_name', {})
             last_name = user_data.get('family_name', {})
             avatar = user_data.get('picture', {})
 
             new_user = User(
-                username = first_name.lower(),
-                email = email,
-                name = full_name,
-                first_name = first_name,
-                last_name = last_name,
-                is_master = is_master,
-                is_active = True,
-                avatar = avatar,
-                password = make_password(access_token),
-                is_staff = False,
-                is_superuser = False,
+                username=first_name.lower(),
+                email=email,
+                name=full_name,
+                first_name=first_name,
+                last_name=last_name,
+                is_master=is_master,
+                is_active=True,
+                avatar=avatar,
+                password=make_password(access_token),
+                is_staff=False,
+                is_superuser=False,
             )
 
             login(request=request, user=new_user)
@@ -91,21 +92,19 @@ class OAuthView(APIView):
                 {'status': 'Acount created successfully.'},
                 status=status.HTTP_202_ACCEPTED
             )
-        
 
-    
         return Response(
             {'status': 'User Logged-In successfully.'},
-            status = status.HTTP_200_OK
+            status=status.HTTP_200_OK
         )
 
         @action(
-        methods=['POST', ],
-        detail=False,
-        url_name='onlogout',
-        url_path='onlogout',
-        permission_classes=[IsAuthenticated],
-        authentication_classes=(SessionAuthentication,)
+            methods=['POST', ],
+            detail=False,
+            url_name='onlogout',
+            url_path='onlogout',
+            permission_classes=[IsAuthenticated],
+            authentication_classes=(SessionAuthentication,)
         )
         def on_logout(self, request):
             logout(request)
@@ -115,5 +114,3 @@ class OAuthView(APIView):
                 },
                 status=status.HTTP_200_OK
             )
-
-
