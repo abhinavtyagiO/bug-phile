@@ -10,7 +10,12 @@ const IssueTag = (props) => {
       label={tag.name}
       variant="outlined"
       className="issue-tag-chip"
-      avatar={<div className="issue-tag-chip-color"></div>}
+      avatar={
+        <div
+          style={{ backgroundColor: tag.color }}
+          className="issue-tag-chip-color"
+        ></div>
+      }
     />
   );
 };
