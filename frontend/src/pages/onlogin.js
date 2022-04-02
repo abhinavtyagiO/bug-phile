@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import axios from "axios";
 import { useSearchParams } from "react-router-dom";
+import { CircularProgress } from "@mui/material";
 import { USER_ON_LOGIN } from "../constants/backend-urls";
 
 const OnLogin = () => {
@@ -34,9 +35,7 @@ const OnLogin = () => {
 
   return (
     <div>
-      <div>code: {code}</div>
-      <div>state: {state}</div>
-      <div>scope: {scope}</div>
+      <CircularProgress />
     </div>
   );
 };

@@ -37,3 +37,13 @@
   overflow-y: auto;
   height: calc(100vh - 64px - 68.5px - 16px);
 }
+
+.project-list-item-skeleton {
+  display: flex;
+  margin: 1rem;
+}
+
+.project-list-item-details-skeleton {
+  width: calc(100% - 60px);
+  padding-left: 1rem;
+}

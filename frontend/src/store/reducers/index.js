@@ -1,6 +1,8 @@
-import { combineReducers } from 'redux';
-import reducer from './auth';
+import { combineReducers } from "redux";
+import projects from "./projects";
+import issues from "./issues";
 
 export default combineReducers({
-    reducer,
+  projects,
+  issues,
 });

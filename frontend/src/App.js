@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Redirect } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
-
 import Layout from "./layout";
 import "./App.css";
 import Header from "./components/header";
