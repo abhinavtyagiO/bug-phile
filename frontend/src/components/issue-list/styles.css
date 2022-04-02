@@ -40,3 +40,14 @@
   overflow-y: auto;
   height: calc(100vh - 64px - 68.5px - 16px);
 }
+
+.issue-list-skeleton {
+  display: flex;
+  align-items: center;
+  margin: 1rem;
+}
+
+.issue-list-detail-skeleton {
+  width: 100%;
+  padding-left: 1rem;
+}

@@ -26,7 +26,7 @@ import {
 import { AddIssueSchema } from "./validation";
 
 const AddIssueForm = () => {
-  const { projectId } = useParams();
+  const { id: projectId } = useParams();
   const [data, setData] = useState({
     title: null,
     description: null,

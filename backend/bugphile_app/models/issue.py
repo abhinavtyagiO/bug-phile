@@ -9,7 +9,7 @@ from bugphile_app.models import (
 from ckeditor.fields import RichTextField
 
 class Issue(models.Model):
-    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='issues')
     reporter = models.ForeignKey(User, on_delete=models.CASCADE, related_name='issues_reported')
     title = models.CharField(max_length=100)
     description = RichTextField(blank=True)

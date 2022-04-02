@@ -26,9 +26,13 @@ const ProjectList = (props) => {
       <List className="project-list-scrollable">
         {props.isLoading ? (
           <>
-            {Array.from(Array(5)).forEach(() => (
-              <ProjectListItemSkeleton />
-            ))}
+            <ProjectListItemSkeleton />
+            <ProjectListItemSkeleton />
+            <ProjectListItemSkeleton />
+            <ProjectListItemSkeleton />
+            <ProjectListItemSkeleton />
+            {/* {Array.from(Array(5)).forEach(() => (
+            ))} */}
           </>
         ) : props.error ? (
           <></>

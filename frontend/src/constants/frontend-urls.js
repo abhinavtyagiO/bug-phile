@@ -3,7 +3,7 @@ export const pages = Object.freeze({
   USERS: "/users",
   USER: "/users/:id",
   PROJECT: "/projects/:id",
-  ISSUE: "/projects/:projectId/issues/:issueId",
+  ISSUE: "/projects/:id/issues/:issueId",
   SIGNIN: "/signin",
   ONLOGIN: "/onlogin",
 });

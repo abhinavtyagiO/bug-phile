@@ -14,3 +14,4 @@ from .stats.project_issues import ProjectIssuesStatsView
 from .stats.project import ProjectStatsView
 from .stats.leaderboard import UserStatsView
 from .who_am_i import WhoAmIView
+from .project_issues import ProjectIssuesView
