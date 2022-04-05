@@ -8,6 +8,7 @@ import user from "./user";
 import userProjects from "./user-projects";
 import userIssuesReported from "./user-issues-reported";
 import userIssuesAssigned from "./user-issues-assigned";
+import issue from "./issue";
 
 export default combineReducers({
   projects,
@@ -19,4 +20,5 @@ export default combineReducers({
   userProjects,
   userIssuesReported,
   userIssuesAssigned,
+  issue,
 });
