@@ -10,6 +10,7 @@ import userIssuesReported from "./user-issues-reported";
 import userIssuesAssigned from "./user-issues-assigned";
 import issue from "./issue";
 import auth from "./auth";
+import updateProjects from "./update-projects";
 
 export default combineReducers({
   projects,
@@ -23,4 +24,5 @@ export default combineReducers({
   userIssuesAssigned,
   issue,
   auth,
+  updateProjects,
 });

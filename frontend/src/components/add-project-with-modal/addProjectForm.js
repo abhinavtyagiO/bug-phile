@@ -3,28 +3,25 @@ import {
   TextField,
   Typography,
   MenuItem,
-  OutlinedInput,
-  Input,
   Button,
   FormControl,
   FormHelperText,
 } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { connect } from "react-redux";
 import Cookies from "js-cookie";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import {
-  API_ROOT,
   PROJECTS,
   PROJECT_STATUSES,
   USERS,
 } from "../../constants/backend-urls";
-import { URL_REGEX } from "../../constants/regex";
-import { isValidUrl } from "../../utils/regex";
 import { AddProjectSchema } from "./validation";
+import { updateProjects } from "../../store/actions/update-projects";
 
-const AddProjectForm = () => {
+const AddProjectForm = (props) => {
   const [data, setData] = useState({
     name: null,
     description: null,
@@ -114,6 +111,7 @@ const AddProjectForm = () => {
             },
           })
           .then((res) => {
+            props.updateProjects();
             console.log(res);
           })
           .catch((err) => {
@@ -220,4 +218,18 @@ const AddProjectForm = () => {
   );
 };
 
-export default AddProjectForm;
+const mapStateToProps = (state) => {
+  return {
+    projects: state.updateProjects.projects,
+    error: state.updateProjects.error,
+    isLoading: state.updateProjects.isLoading,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateProjects: () => dispatch(updateProjects()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddProjectForm);
