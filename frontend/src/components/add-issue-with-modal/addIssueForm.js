@@ -4,7 +4,6 @@ import {
   Typography,
   MenuItem,
   OutlinedInput,
-  Input,
   Button,
   FormControl,
   FormHelperText,
@@ -24,8 +23,10 @@ import {
   USERS,
 } from "../../constants/backend-urls";
 import { AddIssueSchema } from "./validation";
+import { connect } from "react-redux";
+import { updateIssues } from "../../store/actions/update-issues";
 
-const AddIssueForm = () => {
+const AddIssueForm = (props) => {
   const { id: projectId } = useParams();
   const [data, setData] = useState({
     title: null,
@@ -154,6 +155,7 @@ const AddIssueForm = () => {
             },
           })
           .then((res) => {
+            props.updateIssues();
             console.log(res);
           })
           .catch((err) => {
@@ -291,4 +293,18 @@ const AddIssueForm = () => {
   );
 };
 
-export default AddIssueForm;
+const mapStateToProps = (state) => {
+  return {
+    issues: state.updateIssues.issues,
+    error: state.updateIssues.error,
+    isLoading: state.updateIssues.isLoading,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateIssues: () => dispatch(updateIssues()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddIssueForm);
