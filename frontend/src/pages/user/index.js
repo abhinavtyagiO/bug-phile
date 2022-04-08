@@ -34,17 +34,16 @@ const User = (props) => {
     }
   }, [props.fetchUser]);
 
-  console.log(props.user);
-  console.log(props.userProjects);
-
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
-  return !(props.isLoading &&
+  return !(
+    props.isLoading &&
     props.userProjectsIsLoading &&
     props.userIssuesAssignedIsLoading &&
-    props.userIssuesReportedIsLoading) ? (
+    props.userIssuesReportedIsLoading
+  ) ? (
     <div className="user-container">
       <div className="user-container-user-info">
         <Avatar src={props.user.avatar} />

@@ -4,7 +4,6 @@ import Header from "../components/header";
 import { pages } from "../constants/frontend-urls";
 import Layout from "../layout";
 import * as Components from "../pages";
-import ProtectedRoutes from "./protected-routes";
 
 const BaseRouter = () => {
   return (

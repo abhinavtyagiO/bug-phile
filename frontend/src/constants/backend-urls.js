@@ -19,6 +19,7 @@ export const USERS = () => `${API_ROOT()}users/`;
 export const USER = (id) => `${USERS()}${id}/`;
 export const USER_ON_LOGIN = () => `${USERS()}on_login/`;
 export const USER_ON_LOGOUT = () => `${USERS()}on_logout/`;
+export const USER_LOGGED_IN = () => `${API_ROOT()}user_logged_in/`;
 
 export const COMMENTS = () => `${API_ROOT()}comments/`;
 export const COMMENT = (id) => `${COMMENTS()}${id}/`;

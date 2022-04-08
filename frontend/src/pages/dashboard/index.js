@@ -56,8 +56,6 @@ const Dashboard = () => {
     fetchProjectStats();
   }, []);
 
-  console.log(projectStats);
-
   return !apiCall.isLoading && projectStats ? (
     <div className="dashboard-container">
       <div className="dashboard-container-info-left">

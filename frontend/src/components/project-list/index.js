@@ -16,8 +16,6 @@ const ProjectList = (props) => {
     props.fetchProjects();
   }, []);
 
-  console.log(props.projects, props.error, props.isLoading);
-
   return (
     <div className="projects-list-container">
       <div className="add-project-btn">

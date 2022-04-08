@@ -3,8 +3,10 @@ import axios from "axios";
 import { useSearchParams } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
 import { USER_ON_LOGIN } from "../constants/backend-urls";
+import { connect } from "react-redux";
+import { isLoggedIn } from "../store/actions/auth";
 
-const OnLogin = () => {
+const OnLogin = (props) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const code = searchParams.get("code");
   const state = searchParams.get("state");
@@ -19,8 +21,10 @@ const OnLogin = () => {
         state: state,
       })
       .then((res) => {
-        window.location.href = "/";
+        console.log("loggedIn");
         console.log(res.data);
+        window.location.href = "/";
+        props.isLoggedIn();
       })
       .catch((err) => {
         console.log(err);
@@ -40,4 +44,10 @@ const OnLogin = () => {
   );
 };
 
-export default OnLogin;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    isLoggedIn: () => dispatch(isLoggedIn()),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(OnLogin);

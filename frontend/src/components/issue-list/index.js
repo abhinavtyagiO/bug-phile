@@ -16,8 +16,6 @@ const IssueList = (props) => {
   const params = useParams();
   const projectId = params["*"].split("/")[1];
 
-  console.log(projectId, Number.isInteger(parseInt(projectId)));
-
   useEffect(() => {
     if (Number.isInteger(parseInt(projectId))) {
       props.fetchIssues(projectId);

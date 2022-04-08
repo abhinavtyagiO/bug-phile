@@ -1,56 +1,57 @@
-import * as actionTypes from '../actions/actionTypes'
+import * as actionTypes from "../actions/actionTypes";
 
 const initialState = {
-    error: null,
-    currentUser: {
-        id: null,
-        isMaster: null,
-    },
-}
+  error: null,
+  currentUserId: null,
+};
 
 const authStart = (state, action) => {
-    return updateObject(state, {
-      error: null,
-    });
+  return {
+    ...state,
+    error: null,
+  };
 };
-  
+
 const authSuccess = (state, action) => {
-    return updateObject(state, {
-      currentUser: {
-        id: action.currentUser.id,
-        isMaster: action.currentUser.isMaster,
-      },
-      error: null,
-    });
+  return {
+    ...state,
+    currentUserId: action.payload.currentUserId,
+    error: null,
+  };
 };
-  
+
 const authFail = (state, action) => {
-    return updateObject(state, {
-      error: action.error,
-    });
+  return {
+    ...state,
+    error: action.payload.error,
+  };
 };
-  
+
 const authLogout = (state, action) => {
-    return updateObject(state, {});
+  return {
+    ...state,
+    error: null,
+    currentUserId: null,
+  };
 };
 
 const reducer = (state = initialState, action) => {
-    switch (action.type) {
-      case actionTypes.AUTH_START:
-        return authStart(state, action);
-  
-      case actionTypes.AUTH_SUCCESS:
-        return authSuccess(state, action);
-  
-      case actionTypes.AUTH_LOGOUT:
-        return authLogout(state, action);
-  
-      case actionTypes.AUTH_FAIL:
-        return authFail(state, action);
-  
-      default:
-        return state;
-    }
+  switch (action.type) {
+    case actionTypes.AUTH_START:
+      return authStart(state, action);
+
+    case actionTypes.AUTH_SUCCESS:
+      return authSuccess(state, action);
+
+    case actionTypes.AUTH_LOGOUT:
+      return authLogout(state, action);
+
+    case actionTypes.AUTH_FAIL:
+      return authFail(state, action);
+
+    default:
+      return state;
+  }
 };
 
 export default reducer;
