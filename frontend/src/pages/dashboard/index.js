@@ -1,66 +1,29 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import { connect } from "react-redux";
 // import "chart.js";
-import {
-  Button,
-  List,
-  Toolbar,
-  Divider,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  Avatar,
-  CircularProgress,
-} from "@mui/material";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
-import AddIcon from "@mui/icons-material/Add";
+import { Divider, CircularProgress } from "@mui/material";
 // import { Pie } from "react-chartjs-2";
 
-import "./styles.css";
 import ProjectStats from "../../components/project-stats";
-import { dashboardProjectStatsList } from "../../mocks";
-import { PROJECT_STATS } from "../../constants/backend-urls";
+import "./styles.css";
+import { fetchProjectsStats } from "../../store/actions/projects-stats";
 
-const Dashboard = () => {
-  const [projectStats, setProjectStats] = useState();
-  const [apiCall, setApiCall] = useState({
-    isLoading: false,
-    error: false,
-  });
-
-  const fetchProjectStats = () => {
-    setApiCall({
-      isLoading: true,
-      error: false,
-    });
-    axios
-      .get(PROJECT_STATS())
-      .then((res) => {
-        setProjectStats(res.data);
-        setApiCall({
-          isLoading: false,
-          error: false,
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-        setApiCall({
-          isLoading: false,
-          error: err,
-        });
-      });
-  };
-
+const Dashboard = (props) => {
   useEffect(() => {
-    fetchProjectStats();
+    props.fetchProjectsStats();
   }, []);
 
-  return !apiCall.isLoading && projectStats ? (
+  return props.isLoading ? (
+    <>
+      <CircularProgress />
+    </>
+  ) : props.error ? (
+    <></>
+  ) : props.projectsStats ? (
     <div className="dashboard-container">
       <div className="dashboard-container-info-left">
         <div>PROJECT STATS</div>
-        <ProjectStats stats={projectStats} />
+        <ProjectStats stats={props.projectsStats} />
       </div>
       <Divider />
       <div className="dashboard-container-graph-container">
@@ -77,4 +40,18 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+const mapStateToProps = (state) => {
+  return {
+    projectsStats: state.projectsStats.projectsStats,
+    error: state.projectsStats.error,
+    isLoading: state.projectsStats.isLoading,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchProjectsStats: () => dispatch(fetchProjectsStats()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
