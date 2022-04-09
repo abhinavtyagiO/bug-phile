@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { List, Divider, ListItem } from "@mui/material";
+import { List, Divider, ListItem, Typography } from "@mui/material";
 
 import AddProjectWithModal from "../add-project-with-modal";
 import ProjectStatus from "../common/project-status";
@@ -37,14 +37,16 @@ const ProjectList = (props) => {
         ) : (
           props.projects.map((project, index) => (
             <div>
-              <Link to={links.PROJECT(project.id)}>
+              <Link to={links.PROJECT(project.id)} className="project-list-item-link" >
                 <ListItem button className="project-list-item" key={index}>
                   <img
                     className="project-list-item-image"
                     src={project.image}
                   />
                   <div className="project-list-item-content">
+                    <Typography style={{color: '#000000'}}>
                     {project.name}
+                    </Typography>
                     <ProjectStatus status={project.status} />
                   </div>
                 </ListItem>

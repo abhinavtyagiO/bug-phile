@@ -27,10 +27,14 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
+  text-decoration: none;
+  margin-left: 1rem;
+  /* color: '#000000'; */
 }
 
 .project-list-item-image {
   width: 3rem;
+  border-radius: 7px;
 }
 
 .project-list-scrollable {
@@ -46,4 +50,8 @@
 .project-list-item-details-skeleton {
   width: calc(100% - 60px);
   padding-left: 1rem;
+}
+
+.project-list-item-link {
+  text-decoration: none;
 }

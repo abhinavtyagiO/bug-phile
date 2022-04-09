@@ -82,13 +82,13 @@ const Project = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    projectIssues: state.projectIssues.projectIssues,
-    projectIssuesError: state.projectIssues.error,
-    projectIssuesIsLoading: state.projectIssues.isLoading,
-
     project: state.project.project,
     projectError: state.project.error,
     projectIsLoading: state.project.isLoading,
+
+    projectIssues: state.projectIssues.projectIssues,
+    projectIssuesError: state.projectIssues.error,
+    projectIssuesIsLoading: state.projectIssues.isLoading,
   };
 };
 
