@@ -28,6 +28,7 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
+  margin-left: 1rem;
 }
 
 .issue-list-item-content-tags {
@@ -50,4 +51,16 @@
 .issue-list-detail-skeleton {
   width: 100%;
   padding-left: 1rem;
+}
+
+.issue-list-link {
+  text-decoration: none;
+}
+
+.issue-list-item-content-reporter {
+  color: '#6C6F72';
+}
+
+.issue-list-item-tag {
+  margin-right: 1rem;
 }

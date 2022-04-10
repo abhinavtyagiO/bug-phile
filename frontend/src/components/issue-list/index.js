@@ -50,7 +50,7 @@ const IssueList = (props) => {
           <></>
         ) : (
           props.issues.map((issue, index) => (
-            <Link to={links.ISSUE(issue.project.id, issue.id)}>
+            <Link to={links.ISSUE(issue.project.id, issue.id)} className="issue-list-link">
               <IssueListItem key={index} issue={issue} />
             </Link>
           ))

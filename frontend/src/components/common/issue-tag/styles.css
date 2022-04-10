@@ -1,5 +1,6 @@
 .issue-tag-chip {
   display: flex;
+  margin-right: 0.5rem;
 }
 
 .issue-tag-chip-color {

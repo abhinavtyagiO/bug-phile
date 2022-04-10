@@ -1,5 +1,5 @@
 import React from "react";
-import { ListItem } from "@mui/material";
+import { ListItem, Typography } from "@mui/material";
 import IssueStatus from "../common/issue-status";
 import IssueTag from "../common/issue-tag";
 
@@ -12,10 +12,17 @@ const IssueListItem = (props) => {
       <IssueStatus status={issueStatus} />
       <div className="issue-list-item-content">
         <div className="issue-list-item-content-title">
-          {issue.title} • <span>31/01/2022</span>
+          <Typography variant="body1" style={{ color: "#000000" }}>
+            {" "}
+            {issue.title} •{" "}
+            <span style={{ fontSize: "0.75rem" }}>31/01/2022</span>
+          </Typography>
         </div>
         <div className="issue-list-item-content-reporter">
-          By: {issue.reporter.name}
+          <Typography variant="subtitle2" style={{ color: "#6C6F72" }}>
+            {" "}
+            By: {issue.reporter.name}
+          </Typography>
         </div>
         <div className="issue-list-item-content-tags">
           {issueTags.map((tag, index) => {
