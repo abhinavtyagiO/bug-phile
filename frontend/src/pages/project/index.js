@@ -20,11 +20,17 @@ const Project = (props) => {
       //even log is not showing
       console.log("running");
       props.fetchProject(id);
-      props.fetchProjectIssues(id);
+      // props.fetchProjectIssues(id);
     }
   }, [id]);
 
-  return props.project && props.projectIssues ? (
+  return props.isLoading ? (
+    <>
+      <CircularProgress />
+    </>
+  ) : props.error ? (
+    <></>
+  ) : (
     <div className="project-container">
       <h3>{props.project.name}</h3>
       <Divider />
@@ -72,30 +78,28 @@ const Project = (props) => {
       <Divider />
       <div className="project-container-info-left">
         <div>ISSUE STATS</div>
-        <ProjectIssueStats stats={props.projectIssues} />
+        {/* <ProjectIssueStats stats={props.projectIssues} /> */}
       </div>
     </div>
-  ) : (
-    <CircularProgress />
   );
 };
 
 const mapStateToProps = (state) => {
   return {
     project: state.project.project,
-    projectError: state.project.error,
-    projectIsLoading: state.project.isLoading,
+    error: state.project.error,
+    isLoading: state.project.isLoading,
 
-    projectIssues: state.projectIssues.projectIssues,
-    projectIssuesError: state.projectIssues.error,
-    projectIssuesIsLoading: state.projectIssues.isLoading,
+    // projectIssues: state.projectIssues.projectIssues,
+    // projectIssuesError: state.projectIssues.error,
+    // projectIssuesIsLoading: state.projectIssues.isLoading,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchProject: (id) => dispatch(fetchProject(id)),
-    fetchProjectIssues: (id) => dispatch(fetchProjectIssues(id)),
+    // fetchProjectIssues: (id) => dispatch(fetchProjectIssues(id)),
   };
 };
 

@@ -87,11 +87,15 @@ const Header = () => {
 
   const handleLogout = () => {
     axios
-      .post(USER_ON_LOGOUT(), {}, {
-        headers: {
-          "X-CSRFToken": csrftoken,
-        },
-      })
+      .post(
+        USER_ON_LOGOUT(),
+        {},
+        {
+          headers: {
+            "X-CSRFToken": csrftoken,
+          },
+        }
+      )
       .then((res) => {
         window.location.href = "/signin";
       })
@@ -219,8 +223,13 @@ const Header = () => {
           </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            <Link to={pages.DASHBOARD}>
-              <Button variant="outlined">DASHBOARD</Button>
+            <Link to={pages.DASHBOARD} className="dashboard-button-link">
+              <Button
+                variant="outlined"
+                style={{ color: "#9AA0A6", borderColor: "#9AA0A6" }}
+              >
+                <div>DASHBOARD</div>
+              </Button>
             </Link>
             <IconButton
               size="large"

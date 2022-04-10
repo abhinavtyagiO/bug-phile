@@ -27,6 +27,7 @@ const AddIssueWithModal = () => {
         variant="outlined"
         startIcon={<AddIcon />}
         onClick={handleClickOpen}
+        style={{ color: "#9AA0A6", borderColor: "#9AA0A6" }}
       >
         ADD ISSUE
       </Button>

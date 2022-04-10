@@ -1,4 +1,4 @@
-.users-list-container {
+.users-list {
   padding: 1rem;
   width: 100%;
 }
@@ -7,10 +7,24 @@
   display: flex !important;
   justify-content: space-between !important;
   align-items: center !important;
+  margin-top: 1rem;
 }
 
 .users-list-container-user-avatar {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  margin-right: 1rem;
+}
+
+.users-list-link {
+  text-decoration: none;
+}
+
+.users-list-user-name {
+  margin-left: 1rem !important;
+}
+
+.user-list-container {
+  margin-top: 1rem;
 }

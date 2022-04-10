@@ -29,6 +29,7 @@ const IssueList = (props) => {
           variant="outlined"
           startIcon={<FilterListIcon />}
           endIcon={<KeyboardArrowDownIcon />}
+          style={{ color: "#9AA0A6", borderColor: "#9AA0A6" }}
         >
           FILTER
         </Button>
