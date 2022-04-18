@@ -10,6 +10,8 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 
 .issue-container-info-left {
@@ -22,12 +24,14 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  align-items: flex-end;
 }
 
 .issue-container-comment-box {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  margin-top: 0.5px;
 }
 
 .issue-container-comment-content {
@@ -41,4 +45,23 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
+}
+
+.user-link {
+  text-decoration: none;
+}
+
+.issue-container-tags {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.issue-comment-header {
+  display: flex;
+
+}
+
+.issue-add-comment-container {
+  margin-top: 0.5rem;
+  margin-bottom: 2rem;
 }

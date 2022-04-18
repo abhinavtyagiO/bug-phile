@@ -10,7 +10,9 @@ const UserAvatar = (props) => {
       variant="outlined"
       className="user-avatar-chip"
       avatar={
-        <Avatar className="user-avatar-avatar">{props.user.name[0]}</Avatar>
+        <Avatar style={{ backgroundColor: "#5d74ef", color: "white"}} className="user-avatar-avatar">
+          {props.user.name[0]}
+        </Avatar>
       }
     />
   );

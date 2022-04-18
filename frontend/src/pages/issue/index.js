@@ -3,7 +3,14 @@ import { Link, useParams } from "react-router-dom";
 import { links } from "../../constants/frontend-urls";
 import { connect } from "react-redux";
 import axios from "axios";
-import { Button, Divider, Avatar, CircularProgress } from "@mui/material";
+import moment from "moment";
+import {
+  Button,
+  Divider,
+  Avatar,
+  CircularProgress,
+  Typography,
+} from "@mui/material";
 import IssueStatus from "../../components/common/issue-status";
 import IssueTag from "../../components/common/issue-tag";
 import UserAvatar from "../../components/common/user-avatar";
@@ -51,75 +58,119 @@ const Issue = (props) => {
 
   return !apiCall.isLoading && props.issue && comments ? (
     <div className="issue-container">
-      <h3>{props.issue.title}</h3>
+      <Typography variant="h4" sx={{ marginBottom: "0.5rem" }}>
+        {props.issue.title}
+      </Typography>
       <Divider />
       <div className="issue-container-reporter">
         <div className="issue-container-info-left">
-          <div>REPORTED BY</div>
+          <Typography variant="subtitle2" sx={{ color: "#6C6F72" }}>
+            REPORTED BY
+          </Typography>
           <div>
-            <Link to={links.USER(props.issue.reporter.id)}>
+            <Link
+              to={links.USER(props.issue.reporter.id)}
+              className="user-link"
+            >
               <UserAvatar user={props.issue.reporter} />
             </Link>
           </div>
         </div>
         <div className="issue-container-info-right">
-          <div>CREATED ON</div>
-          <div>30/01/2022</div>
+          <Typography variant="subtitle2" sx={{ color: "#6C6F72" }}>
+            CREATED ON
+          </Typography>
+          <Typography>30/01/2022</Typography>
         </div>
       </div>
       <Divider />
-      <div className="issue-container-info-left">
-        <div>TAGS</div>
-        <div className="issue-container-assignee">
-          {props.issue.tags.map((tag, index) => {
-            return <IssueTag tag={tag} index={index} />;
-          })}
+      <div className="issue-container-tags">
+        <div className="issue-container-info-left">
+          <Typography variant="subtitle2" sx={{ color: "#6C6F72" }}>
+            TAGS
+          </Typography>
+          <div className="issue-container-assignee">
+            {props.issue.tags.map((tag, index) => {
+              return <IssueTag tag={tag} index={index} />;
+            })}
+          </div>
         </div>
       </div>
       <Divider />
       <div className="issue-container-reporter">
         <div className="issue-container-info-left">
-          <div>STATUS</div>
+          <Typography variant="subtitle2" sx={{ color: "#6C6F72" }}>
+            STATUS
+          </Typography>
           <IssueStatus status={props.issue.status} />
         </div>
         <div className="issue-container-info-right">
-          <div>PRIORITY</div>
+          <Typography variant="subtitle2" sx={{ color: "#6C6F72" }}>
+            PRIORITY
+          </Typography>
           <IssuePriority priority={props.issue.priority} />
         </div>
       </div>
       <Divider />
-      <div className="issue-container-info-left">
-        <div>ASSIGNEES</div>
-        <div className="issue-container-assignee">
-          {props.issue.assignee.map((user, index) => {
-            return (
-              <Link to={links.USER(user.id)}>
-                <UserAvatar user={user} />
-              </Link>
-            );
-          })}
+      <div className="issue-container-reporter">
+        <div className="issue-container-info-left">
+          <Typography variant="subtitle2" sx={{ color: "#6C6F72" }}>
+            ASSIGNEES
+          </Typography>
+          <div className="issue-container-assignee">
+            {props.issue.assignee.map((user, index) => {
+              return (
+                <Link to={links.USER(user.id)} className="user-link">
+                  <UserAvatar user={user} />
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+      <Divider />
+      <div className="issue-container-reporter">
+        <div className="issue-container-info-left">
+          <Typography variant="subtitle2" sx={{ color: "#6C6F72" }}>
+            DESCRIPTION
+          </Typography>
+          <Typography
+            dangerouslySetInnerHTML={{ __html: props.issue.description }}
+          />
         </div>
       </div>
       <Divider />
       <div className="issue-container-info-left">
-        <div>DESCRIPTION</div>
-        <div dangerouslySetInnerHTML={{ __html: props.issue.description }} />
-      </div>
-      <Divider />
-      <div className="issue-container-info-left">
-        <div>COMMENTS</div>
+        <Typography variant="subtitle2" sx={{ color: "#6C6F72" }}>
+          COMMENTS
+        </Typography>
         {comments.map((comment, index) => {
           return (
             <div className="issue-container-comment-box">
               <Avatar src={comment.commenterDetails.avatar} />
               <div className="issue-container-comment-content">
-                <div className="">
-                  <Link to={links.USER(comment.commenter)}>
-                    {comment.commenterDetails.name}
+                <div className="issue-comment-header">
+                  <Link
+                    to={links.USER(comment.commenter)}
+                    className="user-link"
+                  >
+                    <Typography style={{ color: "#000000" }}>
+                      {comment.commenterDetails.name}
+                      {"   "}
+                    </Typography>
                   </Link>
-                  <span>• {comment.timestamp}</span>
+                  <span>
+                    <Typography
+                      style={{ color: "#595858" }}
+                      variant="subtitle2"
+                    >
+                      {" "}
+                      • {moment(comment.timestamp).format("lll")}
+                    </Typography>
+                  </span>
                 </div>
-                <div
+                <Typography
+                  style={{ color: "#595858" }}
                   dangerouslySetInnerHTML={{ __html: comment.text }}
                   className=""
                 />
@@ -129,16 +180,28 @@ const Issue = (props) => {
         })}
       </div>
       <Divider />
-      <div className="issue-container-info-left">
-        <div>ADD A COMMENT</div>
-        <CKEditor
-          editor={ClassicEditor}
-          onChange={handleEditorChange}
-        ></CKEditor>
+      <div className="issue-add-comment-container">
+        <div className="issue-container-info-left">
+          <Typography
+            variant="subtitle2"
+            sx={{ color: "#6C6F72", marginBottom: "1rem" }}
+          >
+            ADD A COMMENT
+          </Typography>
+          <CKEditor
+            editor={ClassicEditor}
+            onChange={handleEditorChange}
+          ></CKEditor>
+        </div>
+        <Button
+          style={{ marginTop: "1rem" }}
+          type="submit"
+          variant="contained"
+          onClick={addComment}
+        >
+          Add Comment
+        </Button>
       </div>
-      <Button type="submit" variant="contained" onClick={addComment}>
-        Add Issue
-      </Button>
     </div>
   ) : (
     <CircularProgress />
