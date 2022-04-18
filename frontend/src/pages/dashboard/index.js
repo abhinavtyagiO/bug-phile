@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 // import "chart.js";
-import { Divider, CircularProgress } from "@mui/material";
+import { Divider, CircularProgress, Typography } from "@mui/material";
 // import { Pie } from "react-chartjs-2";
 
 import ProjectStats from "../../components/project-stats";
@@ -22,13 +22,13 @@ const Dashboard = (props) => {
   ) : props.projectsStats ? (
     <div className="dashboard-container">
       <div className="dashboard-container-info-left">
-        <div>PROJECT STATS</div>
+        <Typography style={{ color: "#595858" }}>PROJECT STATS</Typography>
         <ProjectStats stats={props.projectsStats} />
       </div>
       <Divider />
       <div className="dashboard-container-graph-container">
         <div className="dashboard-container-graph">
-          <div>ISSUE STATS</div>
+          <Typography style={{ color: "#595858" }} >ISSUE STATS</Typography>
           {/* <div className='dashboard-container-pie-graph'>
             <Pie data={data} />
           </div> */}
