@@ -7,6 +7,7 @@ import {
   Avatar,
   Tab,
   CircularProgress,
+  Typography,
 } from "@mui/material";
 import { TabList, TabContext, TabPanel } from "@mui/lab";
 
@@ -45,10 +46,13 @@ const User = (props) => {
     props.user && (
       <div className="user-container">
         <div className="user-container-user-info">
-          <Avatar src={props.user.avatar} />
+          <Avatar
+            style={{ width: "90px", height: "90px" }}
+            src={props.user.avatar}
+          />
           <div className="user-container-user-info-name">
-            <div>{props.user.name}</div>
-            <div>{props.user.role}</div>
+            <Typography variant="h4" >{props.user.name}</Typography>
+            <Typography>{props.user.role}</Typography>
           </div>
         </div>
         <Divider />
