@@ -4,9 +4,8 @@ import { Chip } from "@mui/material";
 const ProjectStatus = (props) => {
   return (
     <Chip
-      // style={{ backgroundColor: props.status.color }}
+      style={{ backgroundColor: "#5D74EF", color: "#ffffff" }}
       label={props.status.text}
-      color="primary"
     />
   );
 };

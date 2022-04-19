@@ -1,12 +1,15 @@
+import { Typography } from "@mui/material";
 import React from "react";
 
-const  ProjectIssueStats = (props) => {
+const ProjectIssueStats = (props) => {
   return (
     <div className="project-container-issue-stats-container">
       {props.stats.map((stat, index) => (
         <div key={index} className="project-container-issue-stats">
-          <div>{stat.text}</div>
-          <h1>{stat.numIssues}</h1>
+          <Typography style={{ color: "#595858", fontWeight: "bold" }}>
+            {stat.text}
+          </Typography>
+          <Typography variant="h2">{stat.numIssues}</Typography>
         </div>
       ))}
     </div>
