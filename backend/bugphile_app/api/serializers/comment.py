@@ -4,6 +4,14 @@ from bugphile_app.models import Comment
 
 
 class CommentSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Comment
+        fields = '__all__'
+        read_only_fields = ["commenter"]
+
+
+class CommentReadSerializer(CommentSerializer):
     commenter = UserSerializer()
     commenter_details = serializers.SerializerMethodField()
 
@@ -24,7 +32,3 @@ class CommentSerializer(serializers.ModelSerializer):
             'type': type
         }
         return data
-
-    class Meta:
-        model = Comment
-        fields = '__all__'

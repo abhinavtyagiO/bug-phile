@@ -4,6 +4,7 @@ import { links } from "../../constants/frontend-urls";
 import { connect } from "react-redux";
 import axios from "axios";
 import moment from "moment";
+import Cookies from "js-cookie";
 import {
   Button,
   Divider,
@@ -16,24 +17,62 @@ import IssueTag from "../../components/common/issue-tag";
 import UserAvatar from "../../components/common/user-avatar";
 import IssuePriority from "../../components/common/issue-priority";
 import "./styles.css";
-import { ISSUE_COMMENTS } from "../../constants/backend-urls";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { fetchIssue } from "../../store/actions/issue";
 import { fetchIssueComments } from "../../store/actions/issue-comments";
+import { AddCommentSchema } from "./validation";
+import { COMMENTS } from "../../constants/backend-urls";
 
 const Issue = (props) => {
+  const [comment, setComment] = useState({
+    text: null,
+    issue: null,
+  });
   const { issueId } = useParams();
-  const [editorData, setEditorData] = useState();
+  const csrftoken = Cookies.get("csrftoken");
 
   const handleEditorChange = (e, editor) => {
-    setEditorData(editor.getData());
-    console.log(editorData);
+    setComment({
+      ...comment,
+      text: editor.getData(),
+    });
+  };
+  console.log(comment);
+
+  const validateComment = (e) => {
+    e.preventDefault();
+    AddCommentSchema.validate(comment, { abortEarly: false })
+      .then(() => {
+        const formData = new FormData();
+        comment.text && formData.append("text", comment.text);
+        comment.issue && formData.append("issue", comment.issue);
+
+        axios
+          .post(COMMENTS(), formData, {
+            headers: {
+              "Content-Type": "application/json",
+              "X-CSRFToken": csrftoken,
+            },
+          })
+          .then((res) => {
+            console.log(res);
+            props.fetchIssueComments(issueId);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
-  const addComment = () => {};
-
   useEffect(() => {
+    setComment({
+      ...comment,
+      issue: issueId,
+    });
     props.fetchIssue(issueId);
     props.fetchIssueComments(issueId);
   }, [issueId]);
@@ -187,7 +226,7 @@ const Issue = (props) => {
             style={{ marginTop: "1rem" }}
             type="submit"
             variant="contained"
-            onClick={addComment}
+            onClick={validateComment}
           >
             Add Comment
           </Button>

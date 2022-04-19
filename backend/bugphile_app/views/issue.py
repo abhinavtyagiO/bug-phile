@@ -20,5 +20,4 @@ class IssueViewSet(viewsets.ModelViewSet):
         return IssueSerializer
 
     def perform_create(self, serializer):
-        print("heelo")
         serializer.save(reporter=self.request.user)

@@ -1,4 +1,4 @@
-from .comment import CommentSerializer
+from .comment import CommentSerializer, CommentReadSerializer
 from .user import UserSerializer, UserStatsSerializer
 from .issue_priority import IssuePrioritySerializer
 from .issue_status import IssueStatusSerializer, IssueStatusStatsSerializer

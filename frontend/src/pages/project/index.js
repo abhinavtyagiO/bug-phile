@@ -19,7 +19,7 @@ const Project = (props) => {
       props.fetchProject(id);
       props.fetchProjectIssues(id);
     }
-  }, []);
+  }, [id]);
 
   return props.isLoading ? (
     <>

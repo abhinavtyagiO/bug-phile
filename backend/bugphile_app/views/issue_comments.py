@@ -2,7 +2,7 @@ from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
-from bugphile_app.api.serializers import CommentSerializer
+from bugphile_app.api.serializers import CommentReadSerializer
 from bugphile_app.permissions import IsMasterOrReadOnly
 from bugphile_app.models import Issue
 
@@ -23,7 +23,7 @@ class IssueCommentsView(APIView):
                 status=status.HTTP_404_NOT_FOUND
             )
         comments = issue.comments.all()
-        serializer = CommentSerializer(comments, many=True)
+        serializer = CommentReadSerializer(comments, many=True)
         data = serializer.data
         return Response(
             data,
