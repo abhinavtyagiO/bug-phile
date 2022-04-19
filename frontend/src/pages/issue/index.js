@@ -16,7 +16,7 @@ import IssueTag from "../../components/common/issue-tag";
 import UserAvatar from "../../components/common/user-avatar";
 import IssuePriority from "../../components/common/issue-priority";
 import "./styles.css";
-import { COMMENTS } from "../../constants/backend-urls";
+import { ISSUE_COMMENTS } from "../../constants/backend-urls";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { fetchIssue } from "../../store/actions/issue";
@@ -30,9 +30,9 @@ const Issue = (props) => {
   });
   const [editorData, setEditorData] = useState();
 
-  const fetchComments = (issueId) => {
+  const fetchIssueComments = (issueId) => {
     axios
-      .get(COMMENTS())
+      .get(ISSUE_COMMENTS(issueId))
       .then((res) => {
         setComments(res.data);
       })
@@ -50,11 +50,10 @@ const Issue = (props) => {
 
   useEffect(() => {
     props.fetchIssue(issueId);
+    fetchIssueComments(issueId);
   }, [issueId]);
 
-  useEffect(() => {
-    fetchComments(issueId);
-  }, []);
+  console.log(comments);
 
   return !apiCall.isLoading && props.issue && comments ? (
     <div className="issue-container">

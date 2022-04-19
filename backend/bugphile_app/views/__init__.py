@@ -16,3 +16,4 @@ from .stats.leaderboard import UserStatsView
 from .who_am_i import WhoAmIView
 from .project_issues import ProjectIssuesView
 from .user_logged_in import UserLoggedInViewSet
+from .issue_comments import IssueCommentsView

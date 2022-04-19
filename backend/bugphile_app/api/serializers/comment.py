@@ -1,8 +1,10 @@
 from rest_framework import serializers
+from bugphile_app.api.serializers.user import UserSerializer
 from bugphile_app.models import Comment
 
+
 class CommentSerializer(serializers.ModelSerializer):
-    
+    commenter = UserSerializer()
     commenter_details = serializers.SerializerMethodField()
 
     def get_commenter_details(self, obj):
@@ -14,7 +16,6 @@ class CommentSerializer(serializers.ModelSerializer):
             type = 'Assignee'
         if obj.commenter.id == obj.issue.reporter.id:
             type = 'Reporter'
-            
 
         data = {
             'id': obj.commenter.id,
