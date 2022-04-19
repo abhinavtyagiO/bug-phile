@@ -12,75 +12,76 @@ import { fetchProject } from "../../store/actions/project";
 
 const Project = (props) => {
   const { id } = useParams();
-  console.log(id);
+  console.log(id, props);
 
-  //error here, maybe
   useEffect(() => {
     if (Number.isInteger(parseInt(id))) {
-      //even log is not showing
-      console.log("running");
       props.fetchProject(id);
-      // props.fetchProjectIssues(id);
+      props.fetchProjectIssues(id);
     }
-  }, [id]);
+  }, []);
 
   return props.isLoading ? (
     <>
       <CircularProgress />
     </>
   ) : props.error ? (
-    <></>
+    <>err</>
   ) : (
-    <div className="project-container">
-      <h3>{props.project.name}</h3>
-      <Divider />
-      <div className="project-container-reporter">
-        <div className="project-container-info-left">
-          <div>CREATED BY</div>
-          <div>
-            <Link to={links.USER(props.project.creator.id)}>
-              <UserAvatar user={props.project.creator} />
-            </Link>
-          </div>
-        </div>
-        <div className="project-container-info-right">
-          <div>CREATED ON</div>
-          <div>30/01/2022</div>
-        </div>
-      </div>
-      <Divider />
-      <div className="project-container-reporter">
-        <div className="project-container-info-left">
-          <div>STATUS</div>
-          <div>
-            <ProjectStatus status={props.project.status} />
-          </div>
-        </div>
-      </div>
-      <Divider />
-      <div className="project-container-info-left">
-        <div>MEMBERS</div>
-        <div>
-          {props.project.members.map((member, index) => {
-            return (
-              <Link to={links.USER(member.id)}>
-                <UserAvatar user={member} />
+    props.project && (
+      <div className="project-container">
+        <h3>{props.project.name}</h3>
+        <Divider />
+        <div className="project-container-reporter">
+          <div className="project-container-info-left">
+            <div>CREATED BY</div>
+            <div>
+              <Link to={links.USER(props.project.creator.id)}>
+                <UserAvatar user={props.project.creator} />
               </Link>
-            );
-          })}
+            </div>
+          </div>
+          <div className="project-container-info-right">
+            <div>CREATED ON</div>
+            <div>30/01/2022</div>
+          </div>
+        </div>
+        <Divider />
+        <div className="project-container-reporter">
+          <div className="project-container-info-left">
+            <div>STATUS</div>
+            <div>
+              <ProjectStatus status={props.project.status} />
+            </div>
+          </div>
+        </div>
+        <Divider />
+        <div className="project-container-info-left">
+          <div>MEMBERS</div>
+          <div>
+            {props.project.members.map((member, index) => {
+              return (
+                <Link to={links.USER(member.id)}>
+                  <UserAvatar user={member} />
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+        <Divider />
+        <div className="project-container-info-left">
+          <div>DESCRIPTION</div>
+          <div
+            dangerouslySetInnerHTML={{ __html: props.project.description }}
+          />
+        </div>
+        <Divider />
+        <div className="project-container-info-left">
+          <div>ISSUE STATS</div>
+          <ProjectIssueStats stats={props.projectIssues} />
         </div>
       </div>
-      <Divider />
-      <div className="project-container-info-left">
-        <div>DESCRIPTION</div>
-        <div dangerouslySetInnerHTML={{ __html: props.project.description }} />
-      </div>
-      <Divider />
-      <div className="project-container-info-left">
-        <div>ISSUE STATS</div>
-        {/* <ProjectIssueStats stats={props.projectIssues} /> */}
-      </div>
-    </div>
+    )
   );
 };
 
@@ -90,16 +91,16 @@ const mapStateToProps = (state) => {
     error: state.project.error,
     isLoading: state.project.isLoading,
 
-    // projectIssues: state.projectIssues.projectIssues,
-    // projectIssuesError: state.projectIssues.error,
-    // projectIssuesIsLoading: state.projectIssues.isLoading,
+    projectIssues: state.projectIssues.projectIssues,
+    projectIssuesError: state.projectIssues.error,
+    projectIssuesIsLoading: state.projectIssues.isLoading,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchProject: (id) => dispatch(fetchProject(id)),
-    // fetchProjectIssues: (id) => dispatch(fetchProjectIssues(id)),
+    fetchProjectIssues: (id) => dispatch(fetchProjectIssues(id)),
   };
 };
 

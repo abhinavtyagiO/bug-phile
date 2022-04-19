@@ -1,7 +1,7 @@
 import * as actionTypes from "../actions/actionTypes";
 
 const initialState = {
-  project: [],
+  project: null,
   error: null,
   isLoading: false,
 };

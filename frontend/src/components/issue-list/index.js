@@ -16,6 +16,8 @@ const IssueList = (props) => {
   const params = useParams();
   const projectId = params["*"].split("/")[1];
 
+  console.log(projectId);
+
   useEffect(() => {
     if (Number.isInteger(parseInt(projectId))) {
       props.fetchIssues(projectId);
@@ -50,7 +52,10 @@ const IssueList = (props) => {
           <></>
         ) : (
           props.issues.map((issue, index) => (
-            <Link to={links.ISSUE(issue.project.id, issue.id)} className="issue-list-link">
+            <Link
+              to={links.ISSUE(issue.project.id, issue.id)}
+              className="issue-list-link"
+            >
               <IssueListItem key={index} issue={issue} />
             </Link>
           ))

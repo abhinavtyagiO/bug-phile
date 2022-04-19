@@ -7,11 +7,11 @@ export const fetchUserIssuesReportedStart = () => {
     type: actionTypes.FETCH_USER_ISSUES_REPORTED_START,
   };
 };
-export const fetchUserIssuesReportedSuccess = (userIssueReported) => {
+export const fetchUserIssuesReportedSuccess = (userIssuesReported) => {
   return {
     type: actionTypes.FETCH_USER_ISSUES_REPORTED_SUCCESS,
     payload: {
-      userIssueReported: userIssueReported,
+      userIssuesReported: userIssuesReported,
     },
   };
 };
@@ -30,8 +30,8 @@ export const fetchUserIssuesReported = (id) => {
     axios
       .get(USER_ISSUES_REPORTED(id))
       .then((res) => {
-        const userIssueReported = res.data;
-        dispatch(fetchUserIssuesReportedSuccess(userIssueReported));
+        const userIssuesReported = res.data;
+        dispatch(fetchUserIssuesReportedSuccess(userIssuesReported));
       })
       .catch((err) => {
         console.log(err);
