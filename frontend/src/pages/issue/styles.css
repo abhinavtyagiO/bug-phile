@@ -58,10 +58,13 @@
 
 .issue-comment-header {
   display: flex;
-
 }
 
 .issue-add-comment-container {
   margin-top: 0.5rem;
   margin-bottom: 2rem;
+}
+
+.issue-container-edit {
+  display: flex;
 }

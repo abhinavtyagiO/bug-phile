@@ -23,8 +23,8 @@ const OnLogin = (props) => {
       .then((res) => {
         console.log("loggedIn");
         console.log(res.data);
-        window.location.href = "/";
         props.isLoggedIn();
+        window.location.href = "/";
       })
       .catch((err) => {
         console.log(err);

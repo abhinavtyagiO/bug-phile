@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
@@ -11,7 +11,7 @@ import AddIcon from "@mui/icons-material/Add";
 import AddProjectForm from "./addProjectForm";
 
 const AddProjectWithModal = () => {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -27,7 +27,7 @@ const AddProjectWithModal = () => {
         variant="outlined"
         startIcon={<AddIcon />}
         onClick={handleClickOpen}
-        style={{color: "#9AA0A6", borderColor: '#9AA0A6'}}
+        style={{ color: "#9AA0A6", borderColor: "#9AA0A6" }}
       >
         ADD PROJECT
       </Button>

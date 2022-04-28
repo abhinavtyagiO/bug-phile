@@ -13,7 +13,7 @@
 .projects-list-container {
   /* width: 17vw; */
   min-width: 17rem;
-  border-right: 1px solid gray;
+  border-right: 1px solid rgb(218 215 215);
 }
 
 .project-list-item {

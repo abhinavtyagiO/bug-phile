@@ -11,7 +11,11 @@ import {
   Avatar,
   CircularProgress,
   Typography,
+  Dialog,
+  DialogTitle,
+  DialogContent,
 } from "@mui/material";
+import EditDetailsForm from "./editDetailsForm";
 import IssueStatus from "../../components/common/issue-status";
 import IssueTag from "../../components/common/issue-tag";
 import UserAvatar from "../../components/common/user-avatar";
@@ -21,14 +25,16 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { fetchIssue } from "../../store/actions/issue";
 import { fetchIssueComments } from "../../store/actions/issue-comments";
-import { AddCommentSchema } from "./validation";
-import { COMMENTS } from "../../constants/backend-urls";
+import { AddCommentSchema } from "./commentValidation";
+import { COMMENTS, ISSUE } from "../../constants/backend-urls";
 
 const Issue = (props) => {
   const [comment, setComment] = useState({
     text: null,
     issue: null,
   });
+  const [open, setOpen] = useState(false);
+
   const { issueId } = useParams();
   const csrftoken = Cookies.get("csrftoken");
 
@@ -38,7 +44,29 @@ const Issue = (props) => {
       text: editor.getData(),
     });
   };
-  console.log(comment);
+
+  const handleIssueDelete = () => {
+    axios
+      .delete(ISSUE(issueId), {
+        headers: {
+          "X-CSRFToken": csrftoken,
+        },
+      })
+      .then((res) => {
+        window.location.href = "/projects";
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const openEditDetailsModal = () => {
+    setOpen(true);
+  };
+
+  const closeEditDetailsModal = () => {
+    setOpen(false);
+  };
 
   const validateComment = (e) => {
     e.preventDefault();
@@ -86,9 +114,29 @@ const Issue = (props) => {
   ) : (
     props.issue && (
       <div className="issue-container">
-        <Typography variant="h4" sx={{ marginBottom: "0.5rem" }}>
-          {props.issue.title}
-        </Typography>
+        <div className="issue-container-reporter">
+          <Typography variant="h4" sx={{ marginBottom: "0.5rem" }}>
+            {props.issue.title}
+          </Typography>
+          <div className="issue-container-edit">
+            <Button
+              style={{ marginRight: "0.5rem" }}
+              variant="outlined"
+              color="error"
+              onClick={handleIssueDelete}
+            >
+              Delete
+            </Button>
+            <Button variant="outlined" onClick={openEditDetailsModal}>
+              Edit Details
+            </Button>
+            <Dialog open={open} onClose={closeEditDetailsModal}>
+              <DialogTitle>Edit Details</DialogTitle>
+              <DialogContent><EditDetailsForm /></DialogContent>
+            </Dialog>
+          </div>
+        </div>
+
         <Divider />
         <div className="issue-container-reporter">
           <div className="issue-container-info-left">

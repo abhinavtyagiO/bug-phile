@@ -51,7 +51,7 @@ const User = (props) => {
             src={props.user.avatar}
           />
           <div className="user-container-user-info-name">
-            <Typography variant="h4" >{props.user.name}</Typography>
+            <Typography variant="h4">{props.user.name}</Typography>
             <Typography>{props.user.role}</Typography>
           </div>
         </div>

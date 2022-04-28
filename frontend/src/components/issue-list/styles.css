@@ -13,7 +13,7 @@
 .issues-list-container {
   /* width: 40vw; */
   min-width: 33rem;
-  border-right: 1px solid gray;
+  border-right: 1px solid rgb(218 215 215);
 }
 
 .issue-list-item {
@@ -58,7 +58,7 @@
 }
 
 .issue-list-item-content-reporter {
-  color: '#6C6F72';
+  color: "#6C6F72";
 }
 
 .issue-list-item-tag {
