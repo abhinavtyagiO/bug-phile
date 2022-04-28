@@ -127,12 +127,18 @@ const Issue = (props) => {
             >
               Delete
             </Button>
-            <Button variant="outlined" onClick={openEditDetailsModal}>
+            <Button
+              style={{ color: "#9AA0A6", borderColor: "#9AA0A6" }}
+              variant="outlined"
+              onClick={openEditDetailsModal}
+            >
               Edit Details
             </Button>
             <Dialog open={open} onClose={closeEditDetailsModal}>
               <DialogTitle>Edit Details</DialogTitle>
-              <DialogContent><EditDetailsForm /></DialogContent>
+              <DialogContent>
+                <EditDetailsForm />
+              </DialogContent>
             </Dialog>
           </div>
         </div>
