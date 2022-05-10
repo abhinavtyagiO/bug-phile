@@ -1,5 +1,5 @@
 import axios from "axios";
-import { USER_LOGGED_IN, USER_ON_LOGOUT } from "../../constants/backend-urls";
+import { USER_ON_LOGOUT, WHO_AM_I } from "../../constants/backend-urls";
 import * as actionTypes from "./actionTypes";
 
 export const authStart = () => {
@@ -40,11 +40,10 @@ export const isLoggedIn = () => {
   return (dispatch) => {
     dispatch(authStart());
     axios
-      .get(USER_LOGGED_IN())
+      .get(WHO_AM_I())
       .then((res) => {
         console.log(res.data);
         const id = res.data.id;
-        localStorage.setItem("id", id);
         dispatch(authSuccess(id));
       })
       .catch((err) => {

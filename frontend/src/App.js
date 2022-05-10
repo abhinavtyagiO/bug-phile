@@ -1,39 +1,38 @@
-import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Redirect } from "react-router-dom";
+import React, { useEffect } from "react";
+import { BrowserRouter as Router } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
 import "./App.css";
-import axios from "axios";
-import { WHO_AM_I } from "./constants/backend-urls";
 import BaseRouter from "./routes";
+import { isLoggedIn } from "./store/actions/auth";
+import { connect } from "react-redux";
+import { pages } from "./constants/frontend-urls";
 
-const App = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-
-  const whoAmI = () => {
-    axios
-      .get(WHO_AM_I())
-      .then((res) => {
-        setIsLoggedIn(true);
-        setIsLoading(false);
-      })
-      .catch((err) => {
-        console.log(err);
-        setIsLoading(false);
-      });
-  };
-
+const App = (props) => {
   useEffect(() => {
-    whoAmI();
+    props.isLoggedIn();
   }, []);
 
   return (
     <Router>
       <div className="App">
-        {isLoading ? <CircularProgress /> : <BaseRouter />}
+        {props.isLoading ? <CircularProgress /> : <BaseRouter />}
       </div>
     </Router>
   );
 };
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    isAuthenticated: state.auth.currentUserId!=undefined,
+    error: state.auth.error,
+    isLoading: state.auth.isLoading,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    isLoggedIn: () => dispatch(isLoggedIn()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

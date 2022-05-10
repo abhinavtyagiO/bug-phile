@@ -1,8 +1,8 @@
 import * as React from "react";
-import { Box, CssBaseline, Grid, Toolbar, Typography } from "@mui/material";
+import { Grid } from "@mui/material";
 import ProjectList from "../components/project-list";
 import IssueList from "../components/issue-list";
-import Routes from '../routes/protected-routes'
+import Routes from "../routes/protected-routes";
 
 import "./styles.css";
 
