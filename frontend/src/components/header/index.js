@@ -13,16 +13,17 @@ import {
   Menu,
   Button,
 } from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
-import { pages } from "../../constants/frontend-urls";
+import { links, pages } from "../../constants/frontend-urls";
 import axios from "axios";
 import { USER_ON_LOGOUT } from "../../constants/backend-urls";
 import Cookies from "js-cookie";
+import { connect } from "react-redux";
+import "./styles.css";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -64,7 +65,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-const Header = () => {
+const Header = (props) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -125,7 +126,9 @@ const Header = () => {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      <Link to={links.USER(props.currentUserId)} className="profile-link">
+        <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      </Link>
       <MenuItem onClick={handleLogout}>Logout</MenuItem>
     </Menu>
   );
@@ -263,4 +266,12 @@ const Header = () => {
   );
 };
 
-export default Header;
+const mapStateToProps = (state) => {
+  return {
+    currentUserId: state.auth.currentUserId,
+    error: state.auth.error,
+    isLoading: state.auth.isLoading,
+  };
+};
+
+export default connect(mapStateToProps, null)(Header);
