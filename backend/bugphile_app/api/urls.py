@@ -21,7 +21,7 @@ urlpatterns += [
     path(r'oauth', OAuthView.as_view()),
     path(r'project_issues', ProjectIssuesStatsView.as_view()),
     path(r'project_stats', ProjectStatsView.as_view()),
-    path(r'users_stats', UserStatsView.as_view()),
+    path(r'users_stats', UsersStatsView.as_view()),
     path(r'who_am_i', WhoAmIView.as_view()),
     path(r'project_issues_list', ProjectIssuesView.as_view()),
     path(r'issue_comments', IssueCommentsView.as_view()),

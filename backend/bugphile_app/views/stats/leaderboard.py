@@ -8,7 +8,7 @@ from bugphile_app.permissions import IsMasterOrReadOnly
 from bugphile_app.models import User
 
 
-class UserStatsView(APIView):
+class UsersStatsView(APIView):
 
     permission_classes = [IsAuthenticated & IsMasterOrReadOnly]
 

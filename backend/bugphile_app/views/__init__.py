@@ -12,7 +12,7 @@ from .user_things.user_issues_assigned import UserIssuesAssignedViewSet
 from .user_things.user_issues_reported import UserIssuesReportedViewSet
 from .stats.project_issues import ProjectIssuesStatsView
 from .stats.project import ProjectStatsView
-from .stats.leaderboard import UserStatsView
+from .stats.leaderboard import UsersStatsView
 from .who_am_i import WhoAmIView
 from .project_issues import ProjectIssuesView
 from .user_logged_in import UserLoggedInViewSet

@@ -28,6 +28,7 @@ export const PROJECT_STATUSES = () => `${API_ROOT()}project_status/`;
 export const PROJECT_STATUS = (id) => `${PROJECT_STATUSES()}${id}/`;
 
 export const USER_PROJECTS = (id) => `${API_ROOT()}user_projects/${id}/`
+export const USERS_STATS = () => `${API_ROOT()}users_stats`
 
 export const USER_ISSUES_ASSIGNED = (id) => `${API_ROOT()}user_issues_assigned/${id}/`
 

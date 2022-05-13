@@ -1,17 +1,32 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
-// import "chart.js";
+import "chart.js";
+import { BarChart, PieChart } from "react-chartkick";
 import { Divider, CircularProgress, Typography } from "@mui/material";
-// import { Pie } from "react-chartjs-2";
-
 import ProjectStats from "../../components/project-stats";
 import "./styles.css";
 import { fetchProjectsStats } from "../../store/actions/projects-stats";
+import { fetchUsersStats } from "../../store/actions/users-stats";
 
 const Dashboard = (props) => {
+  var usersData = [];
+
+  const getUsersData = () => {
+    props.usersStats &&
+      props.usersStats.map((stat) => {
+        var userStat = [stat.name, stat.numIssues];
+        usersData.push(userStat);
+      });
+  };
+
   useEffect(() => {
     props.fetchProjectsStats();
+    props.fetchUsersStats();
   }, []);
+
+  props.usersStats && getUsersData();
+
+  console.log(usersData);
 
   return props.isLoading ? (
     <>
@@ -28,10 +43,11 @@ const Dashboard = (props) => {
       <Divider />
       <div className="dashboard-container-graph-container">
         <div className="dashboard-container-graph">
-          <Typography style={{ color: "#595858" }} >ISSUE STATS</Typography>
-          {/* <div className='dashboard-container-pie-graph'>
-            <Pie data={data} />
-          </div> */}
+          <Typography style={{ color: "#595858" }}>ISSUE STATS</Typography>
+          <div className="dashboard-container-pie-graph"></div>
+          <div className="dashboard-container-bar-graph">
+            <BarChart data={usersData} />
+          </div>
         </div>
       </div>
     </div>
@@ -43,14 +59,19 @@ const Dashboard = (props) => {
 const mapStateToProps = (state) => {
   return {
     projectsStats: state.projectsStats.projectsStats,
-    error: state.projectsStats.error,
-    isLoading: state.projectsStats.isLoading,
+    projectsStatsError: state.projectsStats.error,
+    projectStatsIsLoading: state.projectsStats.isLoading,
+
+    usersStats: state.usersStats.usersStats,
+    usersStatsError: state.usersStats.error,
+    usersStatsIsLoading: state.usersStats.isLoading,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchProjectsStats: () => dispatch(fetchProjectsStats()),
+    fetchUsersStats: () => dispatch(fetchUsersStats()),
   };
 };
 

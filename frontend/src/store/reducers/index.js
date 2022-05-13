@@ -14,6 +14,7 @@ import updateProjects from "./update-projects";
 import updateIssues from "./update-issues";
 import projectsStats from "./projects-stats";
 import issueComments from "./issue-comments";
+import usersStats from "./users-stats";
 
 export default combineReducers({
   projects,
@@ -31,4 +32,5 @@ export default combineReducers({
   updateIssues,
   projectsStats,
   issueComments,
+  usersStats,
 });
