@@ -64,3 +64,18 @@
 .issue-list-item-tag {
   margin-right: 1rem;
 }
+
+.empty-issue-list {
+  position: relative;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.empty-issue-list-image {
+  width: 50%;
+  margin-bottom: 1.5rem;
+}

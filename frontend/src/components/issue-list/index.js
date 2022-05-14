@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { connect } from "react-redux";
-import { Button, List, Skeleton } from "@mui/material";
+import { Button, List, Typography } from "@mui/material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import FilterListIcon from "@mui/icons-material/FilterList";
-
 import IssueListItem from "./IssueListItem";
 import "./styles.css";
 import AddIssueWithModal from "../add-issue-with-modal";
 import { links } from "../../constants/frontend-urls";
 import { fetchIssues } from "../../store/actions/issues";
 import IssueListSkeleton from "./skeleton";
+import choose from "../../assets/choose.svg";
 
 const IssueList = (props) => {
   const params = useParams();
@@ -24,7 +24,17 @@ const IssueList = (props) => {
     }
   }, [projectId]);
 
-  return (
+  return projectId == undefined ? (
+    <div className="issues-list-container">
+      <div className="empty-issue-list">
+        <img className="empty-issue-list-image" src={choose} />
+        <Typography variant="body1" style={{ color: "#757575" }}>
+          {" "}
+          Select a project to see it's issues.
+        </Typography>
+      </div>
+    </div>
+  ) : (
     <div className="issues-list-container">
       <div className="add-btn-container">
         <Button
