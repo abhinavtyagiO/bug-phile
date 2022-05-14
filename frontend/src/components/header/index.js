@@ -193,22 +193,24 @@ const Header = (props) => {
         style={{ backgroundColor: "#ffffff" }}
       >
         <Toolbar>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={
-              ({
-                display: {
-                  xs: "none",
-                  sm: "block",
+          <Link to={pages.DASHBOARD} className="title-link" >
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              sx={
+                ({
+                  display: {
+                    xs: "none",
+                    sm: "block",
+                  },
                 },
-              },
-              { color: "#595858" })
-            }
-          >
-            Bugphile
-          </Typography>
+                { color: "#595858" })
+              }
+            >
+              Bugphile
+            </Typography>
+          </Link>
           <Search
             style={{
               color: "#818181",
