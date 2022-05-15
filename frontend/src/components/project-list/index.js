@@ -16,6 +16,8 @@ const ProjectList = (props) => {
     props.fetchProjects();
   }, []);
 
+  console.log(props.searchProjectProjects[0]);
+
   return (
     <div className="projects-list-container">
       <div className="add-project-btn">
@@ -34,18 +36,41 @@ const ProjectList = (props) => {
           </>
         ) : props.error ? (
           <></>
+        ) : props.searchProjectProjects.length > 0 ? (
+          <div>
+            <Link
+              to={links.PROJECT(props.searchProjectProjects[0].id)}
+              className="project-list-item-link"
+            >
+              <ListItem button className="project-list-item">
+                <img
+                  className="project-list-item-image"
+                  src={props.searchProjectProjects[0].image}
+                />
+                <div className="project-list-item-content">
+                  <Typography style={{ color: "#000000" }}>
+                    {props.searchProjectProjects[0].name}
+                  </Typography>
+                  <ProjectStatus status={props.searchProjectProjects[0].status} />
+                </div>
+              </ListItem>
+            </Link>
+          </div>
         ) : (
           props.projects.map((project, index) => (
             <div>
-              <Link to={links.PROJECT(project.id)} className="project-list-item-link" >
+              <Link
+                to={links.PROJECT(project.id)}
+                className="project-list-item-link"
+              >
                 <ListItem button className="project-list-item" key={index}>
                   <img
                     className="project-list-item-image"
                     src={project.image}
                   />
                   <div className="project-list-item-content">
-                    <Typography style={{color: '#000000'}}>
-                    {project.name}
+                    <Typography style={{ color: "#000000" }}>
+                      {project.name}
                     </Typography>
                     <ProjectStatus status={project.status} />
                   </div>
@@ -65,6 +90,10 @@ const mapStateToProps = (state) => {
     projects: state.projects.projects,
     error: state.projects.error,
     isLoading: state.projects.isLoading,
+
+    searchProjectProjects: state.searchProject.projects,
+    searchProjectError: state.searchProject.error,
+    searchProjectIsLoading: state.searchProject.isLoading,
   };
 };
 

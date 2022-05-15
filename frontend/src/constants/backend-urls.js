@@ -44,3 +44,5 @@ export const ISSUE_TAGS = () => `${API_ROOT()}tags/`
 export const WHO_AM_I = () => `${API_ROOT()}who_am_i`
 
 export const ISSUE_COMMENTS = (id) => `${API_ROOT()}issue_comments?issue-id=${id}`
+
+export const SEARCH_PROJECT = (project) => `${API_ROOT()}search_project?project=${project}`;

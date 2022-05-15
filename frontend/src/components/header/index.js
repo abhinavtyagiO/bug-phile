@@ -63,8 +63,6 @@ const Header = (props) => {
       });
   };
 
-  console.log(props.projects);
-
   const menuId = "primary-search-account-menu";
   const renderMenu = (
     <Menu
