@@ -25,4 +25,5 @@ urlpatterns += [
     path(r'who_am_i', WhoAmIView.as_view()),
     path(r'project_issues_list', ProjectIssuesView.as_view()),
     path(r'issue_comments', IssueCommentsView.as_view()),
+    path(r'search_project', SearchProjectView.as_view()),
 ]
