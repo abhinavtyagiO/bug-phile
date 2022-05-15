@@ -8,6 +8,13 @@ import {
   Tab,
   CircularProgress,
   Typography,
+  Button,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  TextField,
+  DialogActions,
 } from "@mui/material";
 import { TabList, TabContext, TabPanel } from "@mui/lab";
 
@@ -20,10 +27,26 @@ import { fetchUser } from "../../store/actions/user";
 import { fetchUserProjects } from "../../store/actions/user-projects";
 import { fetchUserIssuesReported } from "../../store/actions/user-issues-reported";
 import { fetchUserIssuesAssigned } from "../../store/actions/user-issues-assigned";
+import { AddRoleSchema } from "./validation";
+import axios from "axios";
+import { USER } from "../../constants/backend-urls";
+import Cookies from "js-cookie";
 
 const User = (props) => {
   const { id } = useParams();
   const [value, setValue] = useState("1");
+  const [data, setData] = useState({
+    role: null,
+  });
+  const [openModal, setOpenModal] = useState(false);
+  const csrftoken = Cookies.get("csrftoken");
+
+  const openRoleModal = () => {
+    setOpenModal(true);
+  };
+  const closeRoleModal = () => {
+    setOpenModal(false);
+  };
 
   useEffect(() => {
     if (Number.isInteger(parseInt(id))) {
@@ -36,6 +59,43 @@ const User = (props) => {
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+  };
+
+  const handleRoleChange = (event) => {
+    const {
+      target: { value, name },
+    } = event;
+    setData({
+      ...data,
+      [name]: value,
+    });
+    console.log(data);
+  };
+
+  const addRole = (e) => {
+    e.preventDefault();
+    AddRoleSchema.validate(data, { abortEarly: false })
+      .then(() => {
+        const formData = new FormData();
+        data.role && formData.append("role", data.role);
+
+        axios
+          .patch(USER(id), formData, {
+            headers: {
+              "Content-Type": "application/json",
+              "X-CSRFToken": csrftoken,
+            },
+          })
+          .then((res) => {
+            props.fetchUser();
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return props.isLoading ? (
@@ -52,7 +112,33 @@ const User = (props) => {
           />
           <div className="user-container-user-info-name">
             <Typography variant="h4">{props.user.name}</Typography>
-            <Typography>{props.user.role}</Typography>
+            <Typography>
+              {props.user.role == "" ? (
+                <Button onClick={openRoleModal}>Add Role</Button>
+              ) : (
+                props.user.role
+              )}
+            </Typography>
+            <Dialog open={openModal} onClose={closeRoleModal}>
+              <DialogTitle>Add Your Role</DialogTitle>
+              <DialogContent>
+                <form>
+                  <TextField
+                    autoFocus
+                    name="role"
+                    value={data.role || ""}
+                    margin="dense"
+                    label="Role"
+                    onChange={handleRoleChange}
+                    fullWidth
+                    variant="standard"
+                  />
+                </form>
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={addRole}>Add</Button>
+              </DialogActions>
+            </Dialog>
           </div>
         </div>
         <Divider />
