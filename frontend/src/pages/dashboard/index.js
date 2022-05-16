@@ -26,7 +26,7 @@ const Dashboard = (props) => {
 
   props.usersStats && getUsersData();
 
-  console.log(usersData);
+  // console.log(usersData);
 
   return props.isLoading ? (
     <>
@@ -46,7 +46,7 @@ const Dashboard = (props) => {
           <Typography style={{ color: "#595858" }}>ISSUE STATS</Typography>
           <div className="dashboard-container-pie-graph"></div>
           <div className="dashboard-container-bar-graph">
-            <BarChart data={usersData} />
+            {/* <BarChart data={usersData} /> */}
           </div>
         </div>
       </div>

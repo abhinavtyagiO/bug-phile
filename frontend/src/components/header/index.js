@@ -42,6 +42,7 @@ const Header = (props) => {
 
   const handleClick = () => {
     props.fetchSearchProject(searchProject);
+    setSearchProject("");
   };
 
   const handleLogout = () => {
@@ -87,6 +88,8 @@ const Header = (props) => {
     </Menu>
   );
 
+  console.log(searchProject);
+
   return (
     <>
       <AppBar
@@ -113,12 +116,16 @@ const Header = (props) => {
               Bugphile
             </Typography>
           </Link>
-          <TextField
-            value={searchProject}
-            label="Search Projects"
-            variant="outlined"
-            onChange={handleChange}
-          />{" "}
+          <div className="search-container">
+            <TextField
+              fullWidth={true}
+              style={{ marginLeft: "1rem" }}
+              value={searchProject}
+              label="Search Projects"
+              variant="outlined"
+              onChange={handleChange}
+            />{" "}
+          </div>
           <Button onClick={handleClick}>
             <SearchIcon />
           </Button>

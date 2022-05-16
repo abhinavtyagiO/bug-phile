@@ -14,6 +14,8 @@ import {
   Dialog,
   DialogTitle,
   DialogContent,
+  DialogContentText,
+  DialogActions,
 } from "@mui/material";
 import EditDetailsForm from "./editDetailsForm";
 import IssueStatus from "../../components/common/issue-status";
@@ -34,6 +36,7 @@ const Issue = (props) => {
     issue: null,
   });
   const [open, setOpen] = useState(false);
+  const [openConfirmDelete, setOpenConfirmDelete] = useState(false);
 
   const { issueId } = useParams();
   const csrftoken = Cookies.get("csrftoken");
@@ -46,6 +49,7 @@ const Issue = (props) => {
   };
 
   const handleIssueDelete = () => {
+    closeConfirmDeleteModal();
     axios
       .delete(ISSUE(issueId), {
         headers: {
@@ -66,6 +70,14 @@ const Issue = (props) => {
 
   const closeEditDetailsModal = () => {
     setOpen(false);
+  };
+
+  const openConfirmDeleteModal = () => {
+    setOpenConfirmDelete(true);
+  };
+
+  const closeConfirmDeleteModal = () => {
+    setOpenConfirmDelete(false);
   };
 
   const validateComment = (e) => {
@@ -123,10 +135,31 @@ const Issue = (props) => {
               style={{ marginRight: "0.5rem" }}
               variant="outlined"
               color="error"
-              onClick={handleIssueDelete}
+              onClick={openConfirmDeleteModal}
             >
               Delete
             </Button>
+            <Dialog
+              open={openConfirmDelete}
+              aria-labelledby="alert-dialog-title"
+              aria-describedby="alert-dialog-description"
+            >
+              <DialogTitle id="alert-dialog-title">
+                {"Confirm Delete Issue?"}
+              </DialogTitle>
+              <DialogContent>
+                <DialogContentText id="alert-dialog-description">
+                  This action cannot be undone. This will permanently delete the
+                  particular issue. Are your sure about this action?
+                </DialogContentText>
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={closeConfirmDeleteModal}>Cancel</Button>
+                <Button color="error" onClick={handleIssueDelete} autoFocus>
+                  Delete
+                </Button>
+              </DialogActions>
+            </Dialog>
             <Button
               style={{ color: "#9AA0A6", borderColor: "#9AA0A6" }}
               variant="outlined"
